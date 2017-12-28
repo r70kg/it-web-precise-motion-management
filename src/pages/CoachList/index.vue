@@ -4,7 +4,7 @@
       <el-table-column
         label="操作">
         <template slot-scope="scope">
-          <el-button @click="handleClick(scope.row)" type="text" size="small">查看</el-button>
+          <el-button @click="handleClick(scope.row)" type="text" size="small">审查</el-button>
         </template>
       </el-table-column>
     </ele-table>
@@ -54,7 +54,7 @@
         this.pagesize=res.pagesize
       },
       handleClick(row) {
-        this.$router.push({name:'coachvertify',params: {id:1}})
+        this.$router.push({name:'coachvertify',params: {id:row.id}})
       },
       ...mapMutations([C.COACHLIST_PAGE_CHANGE_COMMIT])
     },

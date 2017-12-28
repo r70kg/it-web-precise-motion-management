@@ -2,7 +2,7 @@
   <div class="photos">
     <h6>身份证照片</h6>
     <ul class="list">
-      <li v-for="item in photos"><img /></li>
+      <li v-for="item in photos" :key=""><img /></li>
     </ul>
   </div>
 </template>

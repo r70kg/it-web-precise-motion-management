@@ -17,8 +17,7 @@
       @current-change="pagechange"
       :total="totalnum"
       :page-size="pagesize"
-      :current-page="currentpage"
-      >
+      :current-page="currentpage">
       </el-pagination>
     </div>
   </div>

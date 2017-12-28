@@ -28,3 +28,6 @@ export const getuserlist=(payload={})=>{
 export const getcoachlist=(payload={})=>{
   return request(C.GET_COACH_LIST,'get',payload)
 }
+export const getcoachinfo=(payload={})=>{
+  return request(C.GET_COACH_INFO,'get',payload)
+}

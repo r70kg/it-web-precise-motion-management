@@ -1,7 +1,7 @@
 <template>
   <div>
     <ul class="tabheader">
-      <li  style="cursor:pointer" :class="{'active':activeindex==index}" v-for="(item,index) in tablist" :key="item.name" @click="click(index)">{{item.name}}</li>
+      <li  style="cursor:pointer" :class="{'active':activeindex==index}" v-for="(value,key,index) in tab" :key="index" @click="click(index,key)">{{value}}</li>
     </ul>
   </div>
 </template>
@@ -10,8 +10,8 @@
   export default {
     name: 'tabcoponent',
     props:{
-      tablist:{
-        type:Array
+      tab:{
+        type:Object
       },
       change:{
         type:Function
@@ -23,9 +23,9 @@
       }
     },
     methods:{
-      click(index){
+      click(index,key){
         this.activeindex=index
-        this.change(index)
+        this.change(index,key)
       }
     }
   }
