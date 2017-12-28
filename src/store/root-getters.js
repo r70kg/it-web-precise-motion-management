@@ -1,6 +1,5 @@
 export default {
-  widthpercent(){
-
+  percent(){
+    return (1/7)*100%+''
   }
-
 }

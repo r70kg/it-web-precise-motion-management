@@ -12,20 +12,16 @@
 </template>
 
 <script>
-  import {mapState,mapMutations} from 'vuex'
-  import mixin from '@mixin'
+  import {mapState,mapGetters,mapMutations} from 'vuex'
   import {getuserlist} from '@services'
-  import {EleTable} from '@components'
   import  C from '@consts'
+  import {Coachlist_Userlist} from '../pagesmixin'
   export default {
-    mixins: [mixin],
+    mixins: [Coachlist_Userlist],
     data() {
       return {
-        tableData: [],
-        totalnum:1,
-        pagesize:10,
         tableconfig:[
-          {prop:'id',label:'ID',width:(1/7)*100%+this.percent},
+          {prop:'id',label:'ID',width:this.percent},
           {prop:'name',label:'姓名',width:this.percent},
           {prop:'phonenumber',label:'手机号',width:this.percent},
           {prop:'status',label:'状态',width:this.percent},
@@ -35,20 +31,6 @@
       }
     },
     computed: {
-      filtertableData(){
-        return this.tableData.filter((currentValue)=>{
-          return Object.keys(currentValue).some((key)=>{
-            return String(currentValue[key]).indexOf(String(this.filterkey)) > -1
-          })
-        })
-      },
-      filtertotalnum(){
-        if(this.filterkey) return this.filtertableData.length||1
-        return this.totalnum
-      },
-      percent(){
-        return (1/7)*100%+''
-      },
       ...mapState({
         filterkey:state=>state.filterkey,
         currentpage:state=>state.module_userlist.currentpage
@@ -56,14 +38,14 @@
     },
     methods: {
       startInit(){
-        this.getUsersFromPage()
+        this.getAllUsersInfo()
       },
       pageChange(currentPage){
         if(this.filterkey) return
-        this.getUsersFromPage(currentPage)
+        this.getAllUsersInfo(currentPage)
         this[C.USERLIST_PAGE_CHANGE_COMMIT](currentPage)
       },
-      async getUsersFromPage(pagenum=this.currentpage){
+      async getAllUsersInfo(pagenum=this.currentpage){
         const res=await getuserlist({params:{
           page:pagenum
         }})
@@ -73,11 +55,9 @@
       },
       handleClick(row) {
         this.$router.push({name:'coachvertify',params: {id:1}})
-        //console.log(row);
       },
       ...mapMutations([C.USERLIST_PAGE_CHANGE_COMMIT])
     },
-    components:{EleTable}
   }
 </script>
 

@@ -25,3 +25,6 @@ function request(url='',type='get',config={}){
 export const getuserlist=(payload={})=>{
   return request(C.GET_USER_LIST,'get',payload)
 }
+export const getcoachlist=(payload={})=>{
+  return request(C.GET_COACH_LIST,'get',payload)
+}
