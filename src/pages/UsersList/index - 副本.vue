@@ -1,13 +1,32 @@
 <template >
   <div id="userlist">
-    <ele-table :tableData="filtertableData" :tableconfig="tableconfig" :pagechange="pageChange" :totalnum="filtertotalnum" :pagesize="pagesize" :page-size="pagesize" :currentpage="currentpage">
-      <el-table-column
+  <el-table
+    :data="filtertableData"
+    :page-size="pagesize"
+    :highlight-current-row="true"
+    header-row-class-name="coolcolor"
+    :stripe="true"
+    style="width: 100%">
+    <el-table-column :prop='item.prop' :label="item.label" :width="item.width" v-for="item in tableconfig" :key="item.id"></el-table-column>
+    <el-table-column
       label="操作">
       <template slot-scope="scope">
-      <el-button @click="handleClick(scope.row)" type="text" size="small">查看</el-button>
+        <el-button @click="handleClick(scope.row)" type="text" size="small">查看</el-button>
       </template>
-      </el-table-column>
-    </ele-table>
+    </el-table-column>
+  </el-table>
+    <div class="tablefooter">
+      <el-pagination
+        background
+        layout="prev, pager, next"
+        @current-change="currentChange"
+        :total="filtertotalnum"
+        :page-size="pagesize"
+        :current-page.sync="currentpage"
+      >
+      </el-pagination>
+    </div>
+
   </div>
 </template>
 
@@ -15,7 +34,6 @@
   import {mapState,mapMutations} from 'vuex'
   import mixin from '@mixin'
   import {getuserlist} from '@services'
-  import {EleTable} from '@components'
   import  C from '@consts'
   export default {
     mixins: [mixin],
@@ -35,6 +53,9 @@
       }
     },
     computed: {
+      ...mapState([
+        'filterkey'
+      ]),
       filtertableData(){
         return this.tableData.filter((currentValue)=>{
           return Object.keys(currentValue).some((key)=>{
@@ -49,19 +70,22 @@
       percent(){
         return (1/7)*100%+''
       },
-      ...mapState({
-        filterkey:state=>state.filterkey,
-        currentpage:state=>state.module_userlist.currentpage
-      }),
+      currentpage: {
+        get () {
+          return this.$store.state.module_userlist.currentpage
+        },
+        set (value) {
+          this[C.USERLIST_PAGE_CHANGE_COMMIT](value)
+        }
+      },
+
     },
     methods: {
       startInit(){
         this.getUsersFromPage()
       },
-      pageChange(currentPage){
-        if(this.filterkey) return
+      currentChange(currentPage){
         this.getUsersFromPage(currentPage)
-        this[C.USERLIST_PAGE_CHANGE_COMMIT](currentPage)
       },
       async getUsersFromPage(pagenum=this.currentpage){
         const res=await getuserlist({params:{
@@ -70,13 +94,14 @@
         this.tableData=res.tableData
         this.totalnum=res.totalnum
         this.pagesize=res.pagesize
+        //this.currentpage=res.currentpage
       },
       handleClick(row) {
         console.log(row);
       },
       ...mapMutations([C.USERLIST_PAGE_CHANGE_COMMIT])
     },
-    components:{EleTable}
+
   }
 </script>
 

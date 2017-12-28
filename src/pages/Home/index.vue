@@ -52,47 +52,46 @@
 </template>
 
 <script>
-import {mapState,mapMutations} from 'vuex'
-import {FilterInput} from '@components'
-import  C from '@consts'
-export default {
-  name: 'home',
-  data () {
-    return {
-    }
-  },
-  computed:{
-    filterkey:{
-      get(){
-        return this.$store.state.filterkey
-      },
-      set(value){
-        this[C.FILTER_KEY_COMMIT](value)
-        //this.$store.commit(C.FILTER_KEY_COMMIT, value)
+  import {mapState,mapMutations} from 'vuex'
+  import {FilterInput} from '@components'
+  import  C from '@consts'
+  export default {
+    name: 'home',
+    data () {
+      return {
       }
-    }
-  },
-
-  created(){
-  },
-  methods:{
-    handleOpen(key, keyPath) {
-      console.log(key, keyPath);
     },
-    handleClose(key, keyPath) {
-      console.log(key, keyPath);
+    computed:{
+      filterkey:{
+        get(){
+          return this.$store.state.filterkey
+        },
+        set(value){
+          this[C.FILTER_KEY_COMMIT](value)
+        }
+      }
     },
-    ...mapMutations([
-      C.FILTER_KEY_COMMIT
-    ])
-
-
-  },
-  components:{FilterInput}
-}
+    created(){
+    },
+    beforeRouteUpdate(to, from, next){
+      this[C.FILTER_KEY_COMMIT]('')
+      next()
+    },
+    methods:{
+      handleOpen(key, keyPath) {
+        console.log(key, keyPath);
+      },
+      handleClose(key, keyPath) {
+        console.log(key, keyPath);
+      },
+      ...mapMutations([
+        C.FILTER_KEY_COMMIT
+      ])
+    },
+    components:{FilterInput}
+  }
 </script>
 
-<!-- Add "scoped" attribute to limit CSS to this component only -->
 <style lang="scss" scoped>
 
 
