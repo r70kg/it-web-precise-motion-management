@@ -1,5 +1,5 @@
 <template >
-  <div id="userlist">
+  <div id="coachlist">
     coach
   </div>
 </template>

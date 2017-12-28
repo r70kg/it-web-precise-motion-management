@@ -19,6 +19,11 @@ export default new Router({
           name:'coachlist',
           path:'coachlist',
           component:(resolve)=>{require(['@pages/CoachList'],resolve)},
+        },
+        {
+          name:'coachvertify',
+          path:'coachvertify/:id',
+          component:(resolve)=>{require(['@pages/CoachVertify'],resolve)},
         }
       ]
     }

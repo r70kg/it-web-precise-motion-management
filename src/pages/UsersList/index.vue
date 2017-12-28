@@ -72,7 +72,8 @@
         this.pagesize=res.pagesize
       },
       handleClick(row) {
-        console.log(row);
+        this.$router.push({name:'coachvertify',params: {id:1}})
+        //console.log(row);
       },
       ...mapMutations([C.USERLIST_PAGE_CHANGE_COMMIT])
     },

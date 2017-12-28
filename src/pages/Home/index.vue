@@ -18,8 +18,8 @@
               <span>用户管理</span>
             </template>
             <el-menu-item-group>
-              <el-menu-item index="1-1" route="userslist">用户列表</el-menu-item>
-              <el-menu-item index="1-2" route="coachlist">教练列表</el-menu-item>
+              <el-menu-item index="1-1" route="/userslist">用户列表</el-menu-item>
+              <el-menu-item index="1-2" route="/coachlist">教练列表</el-menu-item>
             </el-menu-item-group>
           </el-submenu>
           <el-menu-item index="2">
