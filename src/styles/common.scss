@@ -7,6 +7,17 @@ ul,li{
   paddig:0;
   list-style: none;
 }
+
+.el-message{
+  height:.4rem;
+  min-width:30%;
+  top:.83rem;
+  .el-icon-error{
+   font-size: .28rem;
+  }
+}
+
+
 //-------------------------------------------表格
 tr.coolcolor{
   th{
