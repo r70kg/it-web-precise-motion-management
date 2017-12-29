@@ -23,10 +23,9 @@
         tableconfig:[
           {prop:'id',label:'ID',width:this.percent},
           {prop:'name',label:'姓名',width:this.percent},
-          {prop:'phonenumber',label:'手机号',width:this.percent},
-          {prop:'status',label:'状态',width:this.percent},
-          {prop:'timeregister',label:'注册时间',width:this.percent},
-          {prop:'timeactive',label:'活跃时间',width:this.percent}
+          {prop:'phoneNum',label:'手机号',width:this.percent},
+          {prop:'timeRegister',label:'注册时间',width:this.percent},
+          {prop:'timeActive',label:'活跃时间',width:this.percent}
         ]
       }
     },
@@ -50,11 +49,10 @@
           page:pagenum
         }})
         this.tableData=res.tableData
-        this.totalnum=res.totalnum
-        this.pagesize=res.pagesize
+        this.totalnum=res.totalNum
+        this.pagesize=res.pageSize
       },
       handleClick(row) {
-        //this.$router.push({name:'coachvertify',params: {id:1}})
       },
       ...mapMutations([C.USERLIST_PAGE_CHANGE_COMMIT])
     },

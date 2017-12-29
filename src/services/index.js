@@ -8,7 +8,7 @@ axios.interceptors.request.use(function (config) {
 })
 axios.defaults.timeout=5000
 axios.interceptors.response.use(function (response) {
-  return response.data
+  return response.data.data
 }, function (error) {
   return Promise.reject(error)
 })
