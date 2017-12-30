@@ -1,7 +1,10 @@
 <template>
   <div>
     <ul class="tabheader">
-      <li  style="cursor:pointer" :class="{'active':activeindex==index}" v-for="(value,key,index) in tab" :key="index" @click="click(index,key)">{{value}}</li>
+      <li  style="cursor:pointer" :class="{'active':activekey==key1}" v-for="(value1,key1,index1) in title" :key="key1" @click="click(key1)">{{value1}}</li>
+    </ul>
+    <ul class="tabbody">
+      <slot name="tabitem" v-for="(value2,key2,index2) in title" :tabitem="key2" :activekey="activekey"></slot>
     </ul>
   </div>
 </template>
@@ -10,7 +13,10 @@
   export default {
     name: 'tabcoponent',
     props:{
-      tab:{
+      defaultkey:{
+        type:String
+      },
+      title:{
         type:Object
       },
       change:{
@@ -19,13 +25,14 @@
     },
     data(){
       return {
-        activeindex:0
+        activekey:this.defaultkey
       }
     },
     methods:{
-      click(index,key){
-        this.activeindex=index
-        this.change(index,key)
+      click(key){
+        this.activekey=key
+        console.log(this.activekey)
+        this.change(key)
       }
     }
   }

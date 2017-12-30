@@ -14,6 +14,7 @@ export default {
   },
   computed: {
     filtertableData(){
+      if(!this.filterkey) return this.tableData
       return this.tableData.filter((currentValue)=>{
         return Object.keys(currentValue).some((key)=>{
           return String(currentValue[key]).indexOf(String(this.filterkey)) > -1

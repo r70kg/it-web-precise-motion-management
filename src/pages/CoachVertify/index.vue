@@ -1,16 +1,22 @@
 <template>
   <div id="coachvertify">
-    <Tab :tab="tablistconfig.completeinfo" :change="change"></Tab>
-    <ul class="tabbody">
-      <li v-show='activekey==key1' :class="key1" v-for="(value1,key1,index1) in completeinfo" :key="key1">
-        <div class="left">
-          <vertify-input :label="tablistconfig[key1][key2]" value="一兆韦德南山公馆" v-for="(value2,key2,index2) in value1" :key="key2"></vertify-input>
+    <Tab v-bind="config" :defaultkey="defaultkey" :change="change">
+      <li slot="tabitem" slot-scope="props" v-show="props.activekey==props.tabitem">
+        <div v-for="(value1,key1,index1) in currentinfo" :key="key1">
+          <div class="left">
+            <div v-for="(value2,key2,index2) in value1" v-if="value1.status">{{value2}}</div>
+          </div>
         </div>
-        <div class="right">
-          <VertifyPhoto :photos="photos"></VertifyPhoto>
-        </div>
+
+        <!--<div class="left">-->
+          <!--<div v-for="(value2,key2,index2) in value1" >haahah</div>-->
+          <!--&lt;!&ndash;<vertify-input :label="tablistconfig[key1][key2]" value="一兆韦德南山公馆" v-for="(value2,key2,index2) in value1" :key="key2"></vertify-input>&ndash;&gt;-->
+        <!--</div>-->
+        <!--<div class="right">-->
+          <!--<VertifyPhoto :photos="photos"></VertifyPhoto>-->
+        <!--</div>-->
       </li>
-    </ul>
+    </Tab>
   </div>
 </template>
 <script>
@@ -24,8 +30,8 @@
     name:'coachvertify',
     data() {
       return {
-        tablistconfig: {
-          completeinfo:{
+        config: {
+          title:{
             basicInfo:'基本信息',
             degreeInfo:'学历信息',
             careerAbility:'职业资质'
@@ -34,40 +40,37 @@
             name:'名字',
             sex:'性别',
             phoneNum:'手机号码',
-            cert:'省份证号',
+            card:'省份证号',
             birthday:'出生日期'
           },
           degreeInfo:{
-            maxscholl:'最高学历',
-            graduatefrom:'毕业院校',
+            highestDegree:'最高学历',
+            graduatedUniversity:'毕业院校',
             major:'所学专业',
-            graduatetime:'毕业时间'
+            graduatedTime:'毕业时间'
           },
           careerAbility:{
-            careertime:'从业时间',
-            gyn:'健身房全称(常驻)',
-            gynaddress:'健身房地址（常驻）'
+            jobTime:'从业时间',
+            gym:'健身房全称(常驻)',
+            gymAddress:'健身房地址（常驻）'
           }
         },
-        photos:[
-          {name:'照片1'},
-          {name:'照片2'}
-        ],
-        completeinfo:{},
-        basicinfo:{},
-        activekey:'basicInfo'
+        defaultkey:'basicInfo',
+        currentid:this.$route.params.id,
+        currentinfo:{},
       };
     },
     methods: {
       async startInit(){
-        const res=await getcoachinfo({params:{id:this.$route.params.id}})
-        this.completeinfo=res
-        this.basicinfo=res.basicInfo
+        this.getCoachInfo()
       },
-      change(index,key){
+      async getCoachInfo(info=this.defaultkey){
+        const res=await getcoachinfo({params:{id:this.currentid},query:{info:info}})
+        this.currentinfo=res.info
+        console.log(this.currentinfo)
+      },
 
-        this.activekey=key
-        console.log(this.activekey)
+      change(key){
       }
     },
     components:{Tab,VertifyInput,VertifyPhoto}

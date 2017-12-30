@@ -45,9 +45,7 @@
         this[C.USERLIST_PAGE_CHANGE_COMMIT](currentPage)
       },
       async getAllUsersInfo(pagenum=this.currentpage){
-        const res=await getuserlist({params:{
-          page:pagenum
-        }})
+        const res=await getuserlist({query:{page:pagenum}})
         this.tableData=res.tableData
         this.totalnum=res.totalNum
         this.pagesize=res.pageSize

@@ -46,9 +46,7 @@
         this[C.COACHLIST_PAGE_CHANGE_COMMIT](currentPage)
       },
       async getAllCoachesInfo(pagenum=this.currentpage){
-        const res=await getcoachlist({params:{
-          page:pagenum
-        }})
+        const res=await getcoachlist({query:{page:pagenum}})
         this.tableData=res.tableData
         this.totalnum=res.totalNum
         this.pagesize=res.pageSize

@@ -26,21 +26,34 @@ axios.interceptors.response.use(function (response) {
   return Promise.reject(error)
 })
 
-function request(url='',type='get',config={}){
+function request(url='',type='get',data={},config={}){
+  //路由参数：/user/{id}
+  if(data.params){
+    url=url.replace(/\{([A-Za-z]+)\}/g,function(match){
+      return data.params[match.slice(1,-1)]||''
+    })
+  }
+  //查询参数：/user?id=1
+  const query=data.query
+ //post参数 post内容
+  const body=data.body
+
   return axios({
     ...{
       method:type,
+      params:query,
+      data:body,
       url:url
     },...config
   }).then(res=>{return res})
 }
 
-export const getuserlist=(payload={})=>{
+export const getuserlist=(payload={query:{page}})=>{
   return request(C.GET_USER_LIST,'get',payload)
 }
-export const getcoachlist=(payload={})=>{
+export const getcoachlist=(payload={query:{page}})=>{
   return request(C.GET_COACH_LIST,'get',payload)
 }
-export const getcoachinfo=(payload={})=>{
+export const getcoachinfo=(payload={params:{id}})=>{
   return request(C.GET_COACH_INFO,'get',payload)
 }
