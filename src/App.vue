@@ -19,4 +19,10 @@ export default {
   color: #8597A1;
   font-size: 0.18rem;
 }
+@media screen and (max-width:1136px){
+  #app {
+    width: 1136px;
+  }
+}
+
 </style>

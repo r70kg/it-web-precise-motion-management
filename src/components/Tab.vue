@@ -31,7 +31,6 @@
     methods:{
       click(key){
         this.activekey=key
-        console.log(this.activekey)
         this.change(key)
       }
     }

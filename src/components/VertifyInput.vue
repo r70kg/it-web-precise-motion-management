@@ -2,12 +2,13 @@
   <div class="inputcontainer">
     <label>{{label}}</label>
     <input :value="value" @input="input($event.target.value)" readonly="true" />
+    <span><slot></slot></span>
   </div>
 </template>
 
 <script>
   export default {
-    name: 'inputcomponent',
+    name: 'vertifyInputcomponent',
     props:{
       label:{
         type:String

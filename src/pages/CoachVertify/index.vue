@@ -1,20 +1,18 @@
 <template>
   <div id="coachvertify">
-    <Tab v-bind="config" :defaultkey="defaultkey" :change="change">
+    <Tab :title="config.title" :defaultkey="defaultkey" :change="change">
       <li slot="tabitem" slot-scope="props" v-show="props.activekey==props.tabitem">
-        <div v-for="(value1,key1,index1) in currentinfo" :key="key1">
-          <div class="left">
-            <div v-for="(value2,key2,index2) in value1" v-if="value1.status">{{value2}}</div>
-          </div>
+        <div class="left">
+          <template  v-for="(value1,key1,index1) in currentinfo">
+            <vertify-input :label="config[props.activekey][key2]" :value="value2" v-for="(value2,key2,index2) in value1" :key="key2"  v-if="config[props.activekey][key2]&&typeof value2!=='object'"></vertify-input>
+          </template>
         </div>
 
-        <!--<div class="left">-->
-          <!--<div v-for="(value2,key2,index2) in value1" >haahah</div>-->
-          <!--&lt;!&ndash;<vertify-input :label="tablistconfig[key1][key2]" value="一兆韦德南山公馆" v-for="(value2,key2,index2) in value1" :key="key2"></vertify-input>&ndash;&gt;-->
-        <!--</div>-->
-        <!--<div class="right">-->
-          <!--<VertifyPhoto :photos="photos"></VertifyPhoto>-->
-        <!--</div>-->
+        <div class="right">
+          <template v-for="(value1,key1,index1) in currentinfo">
+            <vertify-photo  :photos="value2" :label="config[props.activekey][key2]" v-for="(value2,key2,index2) in value1" v-if="config[props.activekey][key2]&&typeof value2=='object'"></vertify-photo>
+          </template>
+        </div>
       </li>
     </Tab>
   </div>
@@ -41,7 +39,10 @@
             sex:'性别',
             phoneNum:'手机号码',
             card:'省份证号',
-            birthday:'出生日期'
+            birthday:'出生日期',
+            cardImg:'身份证照片',
+            front:'正面',
+            back:'反面'
           },
           degreeInfo:{
             highestDegree:'最高学历',
@@ -67,10 +68,10 @@
       async getCoachInfo(info=this.defaultkey){
         const res=await getcoachinfo({params:{id:this.currentid},query:{info:info}})
         this.currentinfo=res.info
-        console.log(this.currentinfo)
       },
-
       change(key){
+        this.currentinfo=null;
+        this.getCoachInfo(key)
       }
     },
     components:{Tab,VertifyInput,VertifyPhoto}
@@ -87,25 +88,30 @@
   }
   .tabbody{
     margin:0.03rem 0;
-    li{
-      padding:0.52rem 0.6rem;
-      background: white;
-      display:flex;
-      justify-content: space-between;
-      .left{
-        flex-grow: 1;
-        //width:4.5rem;
-        //border:1px solid red;
-      }
-      .right{
-        display: flex;
-        flex-grow: 1;
-        justify-content: flex-end;
-        //width:7.5rem;
-        //width:45%;
-        //border:1px solid red;
-      }
-    }
+  li{
+    padding:0.52rem 0.6rem;
+    background: white;
+    display:flex;
+    //flex-wrap: wrap;
+    //justify-content: space-between;
+  .left{
+    display:flex;
+    flex-wrap: wrap;
+    flex-grow: 1;
+
+    //width:4.5rem;
+  //border:1px solid red;
+  }
+  .right{
+    margin-left: 1.5rem;
+    display: flex;
+    flex-grow: 1;
+    //justify-content: flex-end;
+  //width:7.5rem;
+  //width:45%;
+  //border:1px solid red;
+  }
+  }
   }
 
 </style>

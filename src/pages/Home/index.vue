@@ -1,8 +1,7 @@
 <template>
-  <el-container>
-    <el-aside width="200px">
+  <div id="home">
+    <div class="sidebar">
       <div class="logo"></div>
-      <div>
         <el-menu
           :router="true"
           default-active="1-1"
@@ -31,11 +30,11 @@
             <span slot="title">导航三</span>
           </el-menu-item>
         </el-menu>
-      </div>
-    </el-aside>
-    <el-container>
-      <el-header>Header</el-header>
-      <el-main>
+
+    </div>
+    <div class="content">
+      <div>Header</div>
+      <div class="main">
         <div class="bread">
           <el-breadcrumb separator-class="el-icon-arrow-right">
             <el-breadcrumb-item :to="{ path: '/' }">首页</el-breadcrumb-item>
@@ -46,9 +45,9 @@
           <!--<filter-input v-model="filterkey"></filter-input>-->
         </div>
         <router-view></router-view>
-      </el-main>
-    </el-container>
-  </el-container>
+      </div>
+    </div>
+  </div>
 </template>
 
 <script>
@@ -93,6 +92,19 @@
 </script>
 
 <style lang="scss" scoped>
+#home{
+  height:100%;
+  display: flex;
+  .sidebar{
+    width:2rem;
+    height:100%;
+    .logo{
 
+    }
+    .el-menu-vertical-demo{
+      min-height:100%;
+    }
+  }
+}
 
 </style>

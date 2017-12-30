@@ -1,5 +1,5 @@
 html,body,#app,.el-container{
-  height:100%;
+  min-height:100%;
 }
 .el-container{
   //opacity:.6;
@@ -22,7 +22,7 @@ body{
 .el-aside {
   overflow-x: hidden;
   width: divide(250,1920) !important;
-  min-width: 2.5rem !important;
+  //min-width: 2.5rem !important;
   background-color: #263238;
   color: #333;
   text-align: center;
