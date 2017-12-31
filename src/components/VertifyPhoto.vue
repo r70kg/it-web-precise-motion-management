@@ -31,12 +31,13 @@
   .photos{
     display: flex;
   h6{
+    margin-right: 1rem;
     white-space:nowrap;
   }
   .list{
     display:flex;
   li{
-    min-width: 2rem;
+    min-width: 2.3rem;
     flex-flow: 1;
   //width:2.3rem;
     height:1.5rem;

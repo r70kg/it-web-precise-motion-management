@@ -1,6 +1,4 @@
-html,body,#app,.el-container{
-  min-height:100%;
-}
+
 .el-container{
   //opacity:.6;
 }
@@ -55,16 +53,7 @@ body{
   //padding-left: 0.96rem;
   background-color: #F4F7F9;
   //color: #333;
-  .bread{
-    display: flex;
-    justify-content:space-between;
-    .el-breadcrumb{
-      margin-bottom: 0.3rem;
-      span{
-        font-size: 0.2rem;
-      }
-    }
-  }
+
 
 }
 

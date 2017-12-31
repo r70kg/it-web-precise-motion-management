@@ -21,12 +21,12 @@
     data() {
       return {
         tableconfig:[
-          {prop:'id',label:'ID',width:this.percent},
-          {prop:'name',label:'姓名',width:this.percent},
-          {prop:'phoneNum',label:'手机号',width:this.percent},
-          {prop:'status',label:'状态',width:this.percent},
-          {prop:'timeRegister',label:'注册时间',width:this.percent},
-          {prop:'timeActive',label:'更新时间',width:this.percent}
+          {prop:'id',label:'ID'},
+          {prop:'name',label:'姓名'},
+          {prop:'phoneNum',label:'手机号'},
+          {prop:'status',label:'状态'},
+          {prop:'timeRegister',label:'注册时间'},
+          {prop:'timeActive',label:'更新时间'}
         ]
       }
     },

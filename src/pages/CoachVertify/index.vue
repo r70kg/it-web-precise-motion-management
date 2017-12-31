@@ -10,7 +10,7 @@
 
         <div class="right">
           <template v-for="(value1,key1,index1) in currentinfo">
-            <vertify-photo  :photos="value2" :label="config[props.activekey][key2]" v-for="(value2,key2,index2) in value1" v-if="config[props.activekey][key2]&&typeof value2=='object'"></vertify-photo>
+            <vertify-photo  :photos="value2" :label="config[props.activekey][key2]" v-for="(value2,key2,index2) in value1" v-if="config[props.activekey][key2]&&typeof value2=='object'" :key="key2"></vertify-photo>
           </template>
         </div>
       </li>
@@ -92,24 +92,18 @@
     padding:0.52rem 0.6rem;
     background: white;
     display:flex;
-    //flex-wrap: wrap;
-    //justify-content: space-between;
+    flex-wrap: no-wrap;
+    justify-content: space-between;
   .left{
+    max-width: 5rem;
     display:flex;
     flex-wrap: wrap;
     flex-grow: 1;
-
-    //width:4.5rem;
-  //border:1px solid red;
+    border:1px solid red;
   }
   .right{
-    margin-left: 1.5rem;
     display: flex;
-    flex-grow: 1;
-    //justify-content: flex-end;
-  //width:7.5rem;
-  //width:45%;
-  //border:1px solid red;
+    border:1px solid red;
   }
   }
   }

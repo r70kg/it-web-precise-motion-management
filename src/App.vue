@@ -18,11 +18,12 @@ export default {
   -moz-osx-font-smoothing: grayscale;
   color: #8597A1;
   font-size: 0.18rem;
+  width:100%;
 }
-@media screen and (max-width:1136px){
-  #app {
-    width: 1136px;
-  }
-}
+/*@media screen and (max-width:1136px){*/
+  /*#app {*/
+    /*width: 1136px;*/
+  /*}*/
+/*}*/
 
 </style>
