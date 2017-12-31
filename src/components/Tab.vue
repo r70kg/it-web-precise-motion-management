@@ -61,7 +61,7 @@
   .tabbody{
     margin:0.03rem 0;
     li{
-      padding:0.52rem 0.6rem;
+      padding:0.32rem 0rem;
       background: white;
     }
   }

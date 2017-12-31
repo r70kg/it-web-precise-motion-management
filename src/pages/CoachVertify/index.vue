@@ -1,7 +1,8 @@
 <template>
   <div id="coachvertify">
-    <Tab :title="config.title" :defaultkey="defaultkey" :change="changeTab">
-      <li slot="tabitem" slot-scope="props" v-show="props.activekey==props.tabitem" class="slot" >
+    <Tab :title="config.title" :defaultkey="defaultkey" :change="changeTab" >
+      <li slot="tabitem" slot-scope="props" v-show="props.activekey==props.tabitem" class="slot">
+        <div class="loadingcontainer" v-loading="loading">
         <div class="left">
           <template  v-for="(item1,index1) in currentinfo">
             <vertify-input :label="config[props.activekey][key2]" :value="value2" :changeinputstatus="()=>changeInputStatus(index1)"  :status="item1['status']" v-for="(value2,key2) in item1"   v-if="config[props.activekey][key2]&&typeof value2!=='object'" :key="key2"></vertify-input>
@@ -12,6 +13,7 @@
           <template v-for="(item1,index1) in currentinfo">
             <vertify-photo  :label="config[props.activekey][key2]" :photos="value2"  :changephotostatus="(index2)=>changePhotoStatus(index1,index2,key2)" v-for="(value2,key2) in item1" v-if="config[props.activekey][key2]&&typeof value2=='object'" :key="key2"></vertify-photo>
           </template>
+        </div>
         </div>
       </li>
     </Tab>
@@ -60,7 +62,7 @@
             qualiCertificateImg:'资格证书'
           }
         },
-        loading:true,
+        loading:false,
         defaultkey:'basicInfo',
         currentid:this.$route.params.id,
         currentinfo:{},
@@ -70,9 +72,10 @@
     methods: {
       async startInit(){
         this.getCoachInfo()
+        this.getCoachInfo('degreeInfo')
       },
       async getCoachInfo(info=this.defaultkey){
-        const res=await getcoachinfo({params:{id:this.currentid},query:{info:info}})
+        const res=await getcoachinfo({params:{id:this.currentid},query:{info:info},loading:[this,'loading']})
         this.currentinfo=res.info
       },
       changeTab(key,activekey){
@@ -104,6 +107,9 @@
   .tabbody{
     margin:0.03rem 0;
   li.slot{
+  .loadingcontainer{
+    width:100%;
+    height:100%;
     padding:0.52rem 0.6rem;
     background: white;
     display:flex;
@@ -111,13 +117,15 @@
   .left{
     max-width: 4.6rem;
     flex-grow: 1;
-    //border:1px solid red;
+  //border:1px solid red;
   }
   .right{
     margin-left: .6rem;
     display: flex;
     flex-wrap: wrap;
   }
+  }
+
   }
   }
 

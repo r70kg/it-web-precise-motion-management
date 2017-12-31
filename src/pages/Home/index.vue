@@ -95,7 +95,7 @@
   #home{
     height:100%;
   .sidebar{
-    z-index: 1;
+    z-index: 10001;
     position:fixed;
     width:2.3rem;
     height:100%;
@@ -120,7 +120,7 @@
     width:100%;
     height:0.66rem;
     background: white;
-    z-index: 1;
+    z-index: 10001;
     position:fixed;
     -moz-box-shadow:0px 2px 8px #9E9E9E; -webkit-box-shadow:0px 2px 8px #9E9E9E; box-shadow:0px 2px 8px #9E9E9E;
   }

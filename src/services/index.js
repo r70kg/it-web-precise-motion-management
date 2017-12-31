@@ -2,6 +2,14 @@ import axios from 'axios'
 import vm from '@/main.js'
 import  C from '@consts'
 
+function loading(data,status){
+  if(data.loading){
+    const self=data.loading[0]
+    const args=data.loading.slice(1)
+    args.forEach((arg)=>{ self[arg]=status })
+  }
+}
+
 axios.interceptors.request.use(function (config) {
   return config
 }, function (error) {
@@ -14,6 +22,8 @@ axios.interceptors.request.use(function (config) {
   return Promise.reject(error)
 })
 axios.defaults.timeout=10000
+const CancelToken = axios.CancelToken
+let cancel
 axios.interceptors.response.use(function (response) {
   return response.data.data
 }, function (error) {
@@ -28,9 +38,9 @@ axios.interceptors.response.use(function (response) {
 
 function request(url='',type='get',data={},config={}){
   //路由参数：/user/{id}
-  if(data.params){
+  if(data.hasOwnProperty('params')){
     url=url.replace(/\{([A-Za-z]+)\}/g,function(match){
-      return data.params[match.slice(1,-1)]||''
+      return data.params[match.slice(1,-1)]
     })
   }
   //查询参数：/user?id=1
@@ -38,14 +48,23 @@ function request(url='',type='get',data={},config={}){
  //post参数 post内容
   const body=data.body
 
+  loading(data,true)
+
+  console.log(cancel)
   return axios({
     ...{
       method:type,
       params:query,
       data:body,
-      url:url
+      url:url,
+      cancelToken: new CancelToken(function executor(c) {
+        cancel = c;
+      })
     },...config
-  }).then(res=>{return res})
+  }).then(res=>{
+    loading(data,false)
+    return res
+  })
 }
 
 export const getuserlist=(payload={query:{page}})=>{
