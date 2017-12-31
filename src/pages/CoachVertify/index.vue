@@ -1,20 +1,21 @@
 <template>
   <div id="coachvertify">
-    <Tab :title="config.title" :defaultkey="defaultkey" :change="change">
-      <li slot="tabitem" slot-scope="props" v-show="props.activekey==props.tabitem" class="slot">
+    <Tab :title="config.title" :defaultkey="defaultkey" :change="changeTab">
+      <li slot="tabitem" slot-scope="props" v-show="props.activekey==props.tabitem" class="slot" >
         <div class="left">
-          <template  v-for="(value1,key1,index1) in currentinfo">
-            <vertify-input :label="config[props.activekey][key2]" :value="value2" v-for="(value2,key2,index2) in value1" :key="key2"  v-if="config[props.activekey][key2]&&typeof value2!=='object'"></vertify-input>
+          <template  v-for="(item1,index1) in currentinfo">
+            <vertify-input :label="config[props.activekey][key2]" :value="value2" :changeinputstatus="()=>changeInputStatus(index1)"  :status="item1['status']" v-for="(value2,key2) in item1"   v-if="config[props.activekey][key2]&&typeof value2!=='object'" :key="key2"></vertify-input>
           </template>
         </div>
 
         <div class="right">
-          <template v-for="(value1,key1,index1) in currentinfo">
-            <vertify-photo  :photos="value2" :label="config[props.activekey][key2]" v-for="(value2,key2,index2) in value1" v-if="config[props.activekey][key2]&&typeof value2=='object'" :key="key2"></vertify-photo>
+          <template v-for="(item1,index1) in currentinfo">
+            <vertify-photo  :label="config[props.activekey][key2]" :photos="value2"  :changephotostatus="(index2)=>changePhotoStatus(index1,index2,key2)" v-for="(value2,key2) in item1" v-if="config[props.activekey][key2]&&typeof value2=='object'" :key="key2"></vertify-photo>
           </template>
         </div>
       </li>
     </Tab>
+    {{currentinfo}}
   </div>
 </template>
 <script>
@@ -59,9 +60,11 @@
             qualiCertificateImg:'资格证书'
           }
         },
+        loading:true,
         defaultkey:'basicInfo',
         currentid:this.$route.params.id,
         currentinfo:{},
+        buttonstatus:null
       };
     },
     methods: {
@@ -72,9 +75,18 @@
         const res=await getcoachinfo({params:{id:this.currentid},query:{info:info}})
         this.currentinfo=res.info
       },
-      change(key){
+      changeTab(key,activekey){
+        if(activekey==key) return;
         this.currentinfo=null;
         this.getCoachInfo(key)
+      },
+      changeInputStatus(index){
+        console.log((this.currentinfo[index]))
+        this.currentinfo[index]['status']=!this.currentinfo[index]['status']
+      },
+      changePhotoStatus(index1,index2,key2){
+        console.log((this.currentinfo[index1][key2][index2]))
+        this.currentinfo[index1][key2][index2]['status']=!this.currentinfo[index1][key2][index2]['status']
       }
     },
     components:{Tab,VertifyInput,VertifyPhoto}

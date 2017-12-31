@@ -97,7 +97,7 @@
   .sidebar{
     z-index: 1;
     position:fixed;
-    width:2rem;
+    width:2.3rem;
     height:100%;
   .logo{
     background-color: white;
@@ -115,7 +115,7 @@
     display: flex;
     flex-wrap: wrap;
     flex-grow: 1;
-    margin-left: 2rem;
+    margin-left: 2.3rem;
   .header{
     width:100%;
     height:0.66rem;

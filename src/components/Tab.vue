@@ -4,7 +4,7 @@
       <li  style="cursor:pointer" :class="{'active':activekey==key1}" v-for="(value1,key1,index1) in title" :key="key1" @click="click(key1)">{{value1}}</li>
     </ul>
     <ul class="tabbody">
-      <slot name="tabitem" v-for="(value2,key2,index2) in title" :tabitem="key2" :activekey="activekey"></slot>
+      <slot name="tabitem" v-for="(value2,key2,index2) in title" :tabitem="key2" :activekey="activekey" ></slot>
     </ul>
   </div>
 </template>
@@ -30,8 +30,8 @@
     },
     methods:{
       click(key){
+        this.change(key,this.activekey)
         this.activekey=key
-        this.change(key)
       }
     }
   }

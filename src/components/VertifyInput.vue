@@ -1,8 +1,8 @@
 <template>
-  <div class="inputcontainer">
+  <div class="inputcontainer" @click="click()">
     <label>{{label}}</label>
     <input :value="value" @input="input($event.target.value)" readonly="true" />
-    <span><slot></slot></span>
+    <span >{{status}}</span>
   </div>
 </template>
 
@@ -10,6 +10,12 @@
   export default {
     name: 'vertifyInputcomponent',
     props:{
+      changeinputstatus:{
+        type:Function
+      },
+      status:{
+
+      },
       label:{
         type:String
       },
@@ -24,6 +30,9 @@
     methods:{
       input(value){
         this.$emit('input', value)
+      },
+      click(v){
+        this.changeinputstatus()
       }
     }
   }

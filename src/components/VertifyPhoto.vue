@@ -2,7 +2,7 @@
   <div class="photos">
     <h6>{{label}}</h6>
     <ul class="list">
-      <li v-for="item in photos" :key=""><img /><span>hahah</span></li>
+      <li v-for="(item,index) in photos" @click="click(index)" :key=""><img /><span>{{item.status}}</span></li>
     </ul>
   </div>
 </template>
@@ -11,6 +11,9 @@
   export default {
     name: 'photocomponent',
     props:{
+      changephotostatus:{
+        type:Function
+      },
       label:{
         type:String
       },
@@ -23,6 +26,9 @@
       }
     },
     methods:{
+      click(index){
+        this.changephotostatus(index)
+      }
     }
   }
 </script>
