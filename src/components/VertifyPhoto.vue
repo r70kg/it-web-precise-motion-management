@@ -28,27 +28,33 @@
 </script>
 
 <style lang="scss" scoped>
+  .photos+.photos{
+    margin-top: .5rem;
+  }
   .photos{
+    width:100%;
     display: flex;
+    justify-content:flex-end;
+
   h6{
-    margin-right: 1rem;
+    //border:1px solid red;
+    font-size: .16rem;
+    margin-right: 0.2rem;
     white-space:nowrap;
   }
-  .list{
+  ul.list{
+    width:5.1rem !important;
+    //border:1px solid blue;
     display:flex;
+    flex-wrap:wrap;
   li{
-    min-width: 2.3rem;
-    flex-flow: 1;
-  //width:2.3rem;
+    margin:.1rem;
+    margin-top: 0;
+    margin-bottom: .2rem;
+    width: 2.3rem;
     height:1.5rem;
     background: #D8D8D8;
   }
-  li+li{
-    margin-left: .2rem;
   }
-
-  display:flex;
-  }
-
   }
 </style>

@@ -1,7 +1,7 @@
 <template>
   <div id="coachvertify">
     <Tab :title="config.title" :defaultkey="defaultkey" :change="change">
-      <li slot="tabitem" slot-scope="props" v-show="props.activekey==props.tabitem">
+      <li slot="tabitem" slot-scope="props" v-show="props.activekey==props.tabitem" class="slot">
         <div class="left">
           <template  v-for="(value1,key1,index1) in currentinfo">
             <vertify-input :label="config[props.activekey][key2]" :value="value2" v-for="(value2,key2,index2) in value1" :key="key2"  v-if="config[props.activekey][key2]&&typeof value2!=='object'"></vertify-input>
@@ -48,12 +48,15 @@
             highestDegree:'最高学历',
             graduatedUniversity:'毕业院校',
             major:'所学专业',
-            graduatedTime:'毕业时间'
+            graduatedTime:'毕业时间',
+            certificateImg:'毕业证书'
           },
           careerAbility:{
             jobTime:'从业时间',
             gym:'健身房全称(常驻)',
-            gymAddress:'健身房地址（常驻）'
+            gymAddress:'健身房地址（常驻）',
+            jobCertificateImg:'从业证书',
+            qualiCertificateImg:'资格证书'
           }
         },
         defaultkey:'basicInfo',
@@ -88,22 +91,20 @@
   }
   .tabbody{
     margin:0.03rem 0;
-  li{
+  li.slot{
     padding:0.52rem 0.6rem;
     background: white;
     display:flex;
-    flex-wrap: no-wrap;
     justify-content: space-between;
   .left{
-    max-width: 5rem;
-    display:flex;
-    flex-wrap: wrap;
+    max-width: 4.6rem;
     flex-grow: 1;
-    border:1px solid red;
+    //border:1px solid red;
   }
   .right{
+    margin-left: .6rem;
     display: flex;
-    border:1px solid red;
+    flex-wrap: wrap;
   }
   }
   }

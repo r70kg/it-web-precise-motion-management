@@ -119,7 +119,7 @@
   .header{
     width:100%;
     height:0.66rem;
-    background: red;
+    background: white;
     z-index: 1;
     position:fixed;
     -moz-box-shadow:0px 2px 8px #9E9E9E; -webkit-box-shadow:0px 2px 8px #9E9E9E; box-shadow:0px 2px 8px #9E9E9E;

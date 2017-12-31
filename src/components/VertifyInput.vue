@@ -31,10 +31,13 @@
 
 <style lang="scss" scoped>
   .inputcontainer{
+    &:first-child{
+     padding-top: 0;
+     }
     display: flex;
     width:100%;
-    padding: 0.5rem 0 0.15rem 0;
-    border-bottom: 1px solid #FFE9EDEF;
+    padding: 0.35rem 0 0.35rem 0;
+    border-bottom: 1px solid rgba(0,178,231,1);
     label{
       width:1.3rem;
     }
