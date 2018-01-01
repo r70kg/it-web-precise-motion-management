@@ -4,24 +4,24 @@
       <div class="logo"></div>
       <el-menu
         :router="true"
-        default-active="1-1"
+        :default-active="routename"
         class="el-menu-vertical-demo"
         @open="handleOpen"
         @close="handleClose"
         background-color="#263238"
         text-color="#fff"
         active-text-color="#ffd04b">
-        <el-submenu index="1">
+        <el-submenu index="b">
           <template slot="title">
             <i class="el-icon-location"></i>
             <span>用户管理</span>
           </template>
           <el-menu-item-group>
-            <el-menu-item index="1-1" route="/userslist">用户列表</el-menu-item>
-            <el-menu-item index="1-2" route="/coachlist">教练列表</el-menu-item>
+            <el-menu-item index="userslist" route="/userslist">用户列表</el-menu-item>
+            <el-menu-item index="coachlist" route="/coachlist">教练列表</el-menu-item>
           </el-menu-item-group>
         </el-submenu>
-        <el-menu-item index="2">
+        <el-menu-item index="2" route="">
           <i class="el-icon-menu"></i>
           <span slot="title">导航二</span>
         </el-menu-item>
@@ -69,7 +69,12 @@
       },
       menudata(){
         return  getMenu(this.$route.name)
+      },
+      routename(){
+        //console.log(this.menudata)
+        return this.menudata[0].name
       }
+
     },
     beforeRouteUpdate(to, from, next){
       this[C.FILTER_KEY_COMMIT]('')
@@ -80,10 +85,10 @@
 
       },
       handleOpen(key, keyPath) {
-        console.log(key, keyPath);
+        //console.log(key, keyPath);
       },
       handleClose(key, keyPath) {
-        console.log(key, keyPath);
+        //console.log(key, keyPath);
       },
       ...mapMutations([
         C.FILTER_KEY_COMMIT

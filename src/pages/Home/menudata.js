@@ -9,19 +9,19 @@ const menudata= [
     id:1,
     name: 'userslist',
     desc:'用户列表',
-    parentsid:[0]
+    parentsid:[]
   },
   {
     id:2,
     name:'coachlist',
     desc:'教练列表',
-    parentsid:[0]
+    parentsid:[]
   },
   {
     id:3,
     name:'coachvertify',
     desc:'教练审核',
-    parentsid:[0,2]
+    parentsid:[2]
   }
 ]
 

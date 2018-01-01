@@ -1,6 +1,6 @@
 <template>
   <el-breadcrumb separator-class="el-icon-arrow-right" >
-    <el-breadcrumb-item :to="{ name:'home'}" v-for="(item,index) in menudata" :key="item.name">{{item.desc}}</el-breadcrumb-item>
+    <el-breadcrumb-item :to="{ name:item.name}" v-for="(item,index) in menudata" :key="item.name">{{item.desc}}</el-breadcrumb-item>
   </el-breadcrumb>
 </template>
 
