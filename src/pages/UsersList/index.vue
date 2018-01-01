@@ -15,7 +15,7 @@
   import {mapState,mapGetters,mapMutations} from 'vuex'
   import {getuserlist} from '@services'
   import  C from '@consts'
-  import {Coachlist_Userlist} from '../pagesmixin'
+  import {Coachlist_Userlist} from '@mixin'
   export default {
     mixins: [Coachlist_Userlist],
     data() {

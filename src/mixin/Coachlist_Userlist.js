@@ -1,5 +1,5 @@
 import {mapState,mapGetters,mapMutations} from 'vuex'
-import mixin from '@mixin'
+import mixin from './mixin.js'
 import {EleTable} from '@components'
 import  C from '@consts'
 export default {

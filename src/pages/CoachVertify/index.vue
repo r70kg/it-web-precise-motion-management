@@ -62,7 +62,7 @@
             qualiCertificateImg:'资格证书'
           }
         },
-        loading:false,
+        loading:true,
         defaultkey:'basicInfo',
         currentid:this.$route.params.id,
         currentinfo:{},
