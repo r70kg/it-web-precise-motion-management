@@ -79,7 +79,7 @@
       },
       changeTab(key,activekey){
         if(activekey==key) return;
-        this.currentinfo=null;
+        //this.currentinfo=null;
         this.getCoachInfo(key)
       },
       changeInputStatus(index){

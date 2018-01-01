@@ -36,12 +36,7 @@
       <div class="header">Header</div>
       <div class="main">
         <div class="bread">
-          <el-breadcrumb separator-class="el-icon-arrow-right">
-            <el-breadcrumb-item :to="{ path: '/' }">首页</el-breadcrumb-item>
-            <el-breadcrumb-item>活动管理</el-breadcrumb-item>
-            <el-breadcrumb-item>活动列表</el-breadcrumb-item>
-            <el-breadcrumb-item>活动详情</el-breadcrumb-item>
-          </el-breadcrumb>
+          <bread-crumb :menudata="menudata"></bread-crumb>
           <!--<filter-input v-model="filterkey"></filter-input>-->
         </div>
         <router-view></router-view>
@@ -52,10 +47,13 @@
 
 <script>
   import {mapState,mapMutations} from 'vuex'
-  import {FilterInput} from '@components'
+  import {FilterInput,BreadCrumb} from '@components'
   import  C from '@consts'
+  import mixin from '@mixin'
+  import  getMenu from './menudata.js'
   export default {
     name: 'home',
+    mixins: [mixin],
     data () {
       return {
       }
@@ -68,15 +66,19 @@
         set(value){
           this[C.FILTER_KEY_COMMIT](value)
         }
+      },
+      menudata(){
+        return  getMenu(this.$route.name)
       }
-    },
-    created(){
     },
     beforeRouteUpdate(to, from, next){
       this[C.FILTER_KEY_COMMIT]('')
       next()
     },
     methods:{
+      startInit(){
+
+      },
       handleOpen(key, keyPath) {
         console.log(key, keyPath);
       },
@@ -87,7 +89,7 @@
         C.FILTER_KEY_COMMIT
       ])
     },
-    components:{FilterInput}
+    components:{FilterInput,BreadCrumb}
   }
 </script>
 
@@ -128,15 +130,6 @@
     margin-top: 0.66rem;
     padding: 0.44rem 0.6rem;
     width:100%;
-  .bread{
-    display: flex;
-    justify-content:space-between;
-  .el-breadcrumb{
-    margin-bottom: 0.3rem;
-  span{
-    font-size: 0.2rem;
-  }}
-  }
   }
   }
   }
