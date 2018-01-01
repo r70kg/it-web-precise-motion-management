@@ -72,7 +72,6 @@
     methods: {
       async startInit(){
         this.getCoachInfo()
-        this.getCoachInfo('degreeInfo')
       },
       async getCoachInfo(info=this.defaultkey){
         const res=await getcoachinfo({params:{id:this.currentid},query:{info:info},loading:[this,'loading']})
