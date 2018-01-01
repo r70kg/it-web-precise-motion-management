@@ -119,9 +119,14 @@
   //border:1px solid red;
   }
   .right{
+    max-width: 6rem;
+    justify-content: flex-end;
     margin-left: .6rem;
     display: flex;
     flex-wrap: wrap;
+    .photos{
+      max-width: 6rem;
+    }
   }
   }
 

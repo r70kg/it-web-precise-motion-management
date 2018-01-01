@@ -1,9 +1,10 @@
 import Vue from 'vue'
 import Router from 'vue-router'
+import store from '@store'
 
 Vue.use(Router)
 
-export default new Router({
+const router=new Router({
   routes: [
     {
       path: '/',
@@ -26,6 +27,29 @@ export default new Router({
           component:(resolve)=>{require(['@pages/CoachVertify'],resolve)},
         }
       ]
-    }
+    },
+    {
+      name:'login',
+      path:'/login',
+      meta:{requireAuth:false},
+      component:(resolve)=>{require(['@pages/Login'],resolve)},
+    },
   ]
 })
+
+router.beforeEach((to, from, next) => {
+  if(to.matched.some(record => record.meta.requireAuth===false)){
+    next()
+  }else{
+    if(store.state.personInfo){
+      next()
+    }else{
+      next({
+        name:'login',
+        query: {redirect: to.fullPath}
+      })
+    }
+  }
+})
+
+export default router

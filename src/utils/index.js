@@ -1,7 +1,8 @@
 import Vue from 'vue'
 import './rem.js'
 import './normalize.css'
-import Mapvuex from './mapvuex.js'
+import './util.js'
+import Plugins from './plugins.js'
 
-Vue.use(Mapvuex)
+Vue.use(Plugins)
 

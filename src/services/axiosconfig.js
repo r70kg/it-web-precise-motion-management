@@ -26,7 +26,11 @@ axios.interceptors.request.use(function (config) {
 
 axios.defaults.timeout=10000
 axios.interceptors.response.use(function (response) {
-  return response.data.data
+  if(response.data.data){
+    return response.data.data
+  }else{
+    return response.data
+  }
 }, function (error) {
   if (axios.isCancel(error)) {
     console.log('Request canceled', error.message);

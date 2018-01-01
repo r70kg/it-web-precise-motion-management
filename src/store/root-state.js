@@ -1,4 +1,5 @@
 export default {
-  filterkey:''
+  filterkey:'',
+  personInfo:true
 }
 
