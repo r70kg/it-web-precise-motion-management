@@ -1,6 +1,6 @@
 <template >
   <div id="coachlist">
-    <ele-table :tableData="filtertableData" :tableconfig="tableconfig" :pagechange="pageChange" :totalnum="filtertotalnum" :pagesize="pagesize" :page-size="pagesize" :currentpage="currentpage">
+    <ele-table :tableData="filtertableData" :tableconfig="tableconfig" :pagechange="pageChange" :totalnum="filtertotalnum" :pagesize="pagesize" :page-size="pagesize" :currentpage="currentpage" :loading="loading">
       <el-table-column
         label="操作">
         <template slot-scope="scope">
@@ -27,7 +27,8 @@
           {prop:'status',label:'状态',width:this.percent},
           {prop:'timeRegister',label:'注册时间',width:this.percent},
           {prop:'timeActive',label:'更新时间',width:this.percent}
-        ]
+        ],
+        loading:true
       }
     },
     computed: {
@@ -46,7 +47,7 @@
         this[C.COACHLIST_PAGE_CHANGE_COMMIT](currentPage)
       },
       async getAllCoachesInfo(pagenum=this.currentpage){
-        const res=await getcoachlist({query:{page:pagenum}})
+        const res=await getcoachlist({query:{page:pagenum},loading:[this,'loading']})
         this.tableData=res.tableData
         this.totalnum=res.totalNum
         this.pagesize=res.pageSize

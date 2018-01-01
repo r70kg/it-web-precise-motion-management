@@ -20,6 +20,11 @@ ul,li{
 #coachvertify{
   min-width: $minwidth;
 }
+//loading状态
+.el-loading-spinner .circular{
+  width:.7rem;
+  height:.7rem;
+}
 
 //------------------------------------------警告
 .el-message{

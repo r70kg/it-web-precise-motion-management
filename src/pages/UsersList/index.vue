@@ -1,6 +1,6 @@
 <template >
   <div id="userlist">
-    <ele-table :tableData="filtertableData" :tableconfig="tableconfig" :pagechange="pageChange" :totalnum="filtertotalnum" :pagesize="pagesize" :page-size="pagesize" :currentpage="currentpage">
+    <ele-table :tableData="filtertableData" :tableconfig="tableconfig" :pagechange="pageChange" :totalnum="filtertotalnum" :pagesize="pagesize" :page-size="pagesize" :currentpage="currentpage" :loading="loading">
       <el-table-column
       label="操作">
       <template slot-scope="scope">
@@ -26,7 +26,8 @@
           {prop:'phoneNum',label:'手机号',width:this.percent},
           {prop:'timeRegister',label:'注册时间',width:this.percent},
           {prop:'timeActive',label:'活跃时间',width:this.percent}
-        ]
+        ],
+        loading:true
       }
     },
     computed: {
@@ -45,7 +46,7 @@
         this[C.USERLIST_PAGE_CHANGE_COMMIT](currentPage)
       },
       async getAllUsersInfo(pagenum=this.currentpage){
-        const res=await getuserlist({query:{page:pagenum}})
+        const res=await getuserlist({query:{page:pagenum},loading:[this,'loading']})
         this.tableData=res.tableData
         this.totalnum=res.totalNum
         this.pagesize=res.pageSize

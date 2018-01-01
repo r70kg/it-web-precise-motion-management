@@ -5,7 +5,8 @@
       :highlight-current-row="true"
       header-row-class-name="coolcolor"
       :stripe="true"
-      style="width: 100%">
+      style="width: 100%"
+      v-loading="loading">
       <el-table-column :prop='item.prop' :label="item.label" :width="item.width" v-for="item in tableconfig" :key="item.id">
       </el-table-column>
       <slot></slot>
@@ -48,6 +49,9 @@
       currentpage:{
         type:Number,
         default:1
+      },
+      loading:{
+        default:true
       }
     },
     data() {
