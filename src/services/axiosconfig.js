@@ -56,9 +56,9 @@ function request(url='',type='get',data={},config={}){
 
   //请求池控制，同样的请求（即一样的url,不同的请求参数或post数据，只要url相同就算同一种请求），上次没请求完
   //的，直接abort掉，使用最新的请求
-  if(requestspool.url){
-    requestspool.url('同类请求主动取消，防止重复请求')
-    requestspool.url=null
+  if(requestspool[url]){
+    requestspool[url]('同类请求主动取消，防止重复请求')
+    requestspool[url]=null
   }
   return axios({
     ...{
@@ -67,8 +67,8 @@ function request(url='',type='get',data={},config={}){
       data:body,
       url:url,
       cancelToken: new CancelToken(function executor(c) {
-        if(!requestspool.url){
-          requestspool.url=c
+        if(!requestspool[url]){
+          requestspool[url]=c
         }
       })
     },...config
