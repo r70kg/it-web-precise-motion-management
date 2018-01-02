@@ -3,11 +3,13 @@
     <div class="inputinfo">
       <el-form :model="ruleForm2" status-icon :rules="rules2" ref="ruleForm2" label-width="100px" class="demo-ruleForm">
         <el-form-item label="姓名" prop="name">
-          <el-input type="password" v-model="ruleForm2.name" auto-complete="off"></el-input>
+          <el-input type="text" v-model="ruleForm2.name" auto-complete="off"></el-input>{{ruleForm2.name}}
         </el-form-item>
         <el-form-item label="年龄" prop="password">
-          <el-input v-model.number="ruleForm2.password"></el-input>
+          <el-input type="password" v-model.number="ruleForm2.password"></el-input>{{ruleForm2.password}}
         </el-form-item>
+        <input type="text" v-model="kaptcha">
+        <div @click="changeimg"><img :src="imgsrc"></div>
         <el-form-item class="button">
           <el-button type="primary" @click="submitForm('ruleForm2')">提交</el-button>
         </el-form-item>
@@ -20,6 +22,8 @@
   import {mapMutations} from 'vuex'
   import {login} from '@services'
   import  C from '@consts'
+  import {getEncrytedPwd} from '@utils'
+  import axios from 'axios'
   export default {
     name: 'login',
     data () {
@@ -40,8 +44,8 @@
 
       return {
         ruleForm2: {
-          name: 'weixiaoyi',
-          password: 'weixiaoyi'
+          name: 'chujunfei',
+          password: 'chujunfei'
         },
         rules2: {
           name: [
@@ -50,11 +54,16 @@
           password: [
             { validator: validatePass, trigger: 'blur' }
           ]
-        }
+        },
+        imgsrc:'https://boss.icarbonx.com/bossauth/captcha-image.html',
+        kaptcha:''
       };
     },
 
     methods:{
+      changeimg(){
+        this.imgsrc=this.imgsrc+'?timestamp='+Date.now()
+      },
       submitForm(formName) {
         this.$refs[formName].validate((valid) => {
           if (valid) {
@@ -67,11 +76,22 @@
       },
 
       async login(){
-        const res=await login({body:{name:this.ruleForm2.name,password:this.ruleForm2.password}})
-        if(this.$ISRESOK(res)){
-          this[C.CHANGE_PERSONINFO_COMMIT](res)
-          this.$router.push(this.$route.query.redirect||{name:'userslist'})
-        }
+          axios.post('https://boss.icarbonx.com/bossauth/login.do',{
+            userName:this.ruleForm2.name,
+            password1:'blank',
+            kaptcha:this.kaptcha,
+            password:getEncrytedPwd(this.ruleForm2.name,this.ruleForm2.password,Math.random()),
+            redirectUrl:''
+          }).then((res)=>{
+            console.log(res)
+          }).catch(function (error) {
+            console.log(error)
+          })
+//        const res=await login({body:{name:this.ruleForm2.name,password:this.ruleForm2.password}})
+//        if(this.$ISRESOK(res)){
+//          this[C.CHANGE_PERSONINFO_COMMIT](res)
+//          this.$router.push(this.$route.query.redirect||{name:'userslist'})
+//        }
       },
       ...mapMutations([
         C.CHANGE_PERSONINFO_COMMIT
