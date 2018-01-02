@@ -7,8 +7,9 @@
 </template>
 
 <script>
-import {mapState} from 'vuex'
+import {mapMutations} from 'vuex'
 import {login} from '@services'
+import  C from '@consts'
 export default {
   name: 'login',
   data () {
@@ -24,9 +25,13 @@ export default {
     async login(){
       const res=await login({body:{name:this.name,password:this.password}})
       if(this.$ISRESOK(res)){
+        this[C.CHANGE_PERSONINFO_COMMIT](res)
         this.$router.push(this.$route.query.redirect||{name:'userslist'})
       }
-    }
+    },
+    ...mapMutations([
+      C.CHANGE_PERSONINFO_COMMIT
+    ])
   }
 }
 </script>

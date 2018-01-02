@@ -11,7 +11,7 @@
         background-color="#263238"
         text-color="#fff"
         active-text-color="#ffd04b">
-        <el-submenu index="b">
+        <el-submenu index="index">
           <template slot="title">
             <i class="el-icon-location"></i>
             <span>用户管理</span>
@@ -33,7 +33,7 @@
 
     </div>
     <div class="content">
-      <div class="header">Header</div>
+      <div class="header">{{personInfo}}</div>
       <div class="main">
         <div class="bread">
           <bread-crumb :menudata="menudata"></bread-crumb>
@@ -46,12 +46,11 @@
 </template>
 
 <script>
-  import {mapState,mapMutations} from 'vuex'
+  import {mapState,mapMutations,mapActions} from 'vuex'
   import {FilterInput,BreadCrumb} from '@components'
   import  C from '@consts'
   import mixin from '@mixin'
   import  getMenu from './menudata.js'
-  import {get_user_info} from '@services'
   export default {
     name: 'home',
     mixins: [mixin],
@@ -74,7 +73,10 @@
       routename(){
         //console.log(this.menudata)
         return this.menudata[0].name
-      }
+      },
+      ...mapState([
+        'personInfo'
+      ])
 
     },
     beforeRouteUpdate(to, from, next){
@@ -82,9 +84,6 @@
       next()
     },
     methods:{
-      async getUserInfo(){
-        get_user_info()
-      },
       handleOpen(key, keyPath) {
         //console.log(key, keyPath);
       },
@@ -93,6 +92,9 @@
       },
       ...mapMutations([
         C.FILTER_KEY_COMMIT
+      ]),
+      ...mapActions([
+        'getUserInfo'
       ])
     },
     components:{FilterInput,BreadCrumb}
@@ -125,6 +127,7 @@
     flex-grow: 1;
     margin-left: 2.3rem;
   .header{
+    padding: 0rem 0.6rem;
     width:100%;
     height:0.66rem;
     background: white;
