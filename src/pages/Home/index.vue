@@ -51,6 +51,7 @@
   import  C from '@consts'
   import mixin from '@mixin'
   import  getMenu from './menudata.js'
+  import {get_user_info} from '@services'
   export default {
     name: 'home',
     mixins: [mixin],
@@ -81,8 +82,8 @@
       next()
     },
     methods:{
-      startInit(){
-
+      async getUserInfo(){
+        get_user_info()
       },
       handleOpen(key, keyPath) {
         //console.log(key, keyPath);

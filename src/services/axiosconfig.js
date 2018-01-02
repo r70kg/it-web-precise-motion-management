@@ -1,5 +1,7 @@
 import axios from 'axios'
 import vm from '@/main.js'
+import C from '@consts'
+import router from '@router'
 
 const loading=function(data,status){
   if(data.loading){
@@ -25,12 +27,16 @@ axios.interceptors.request.use(function (config) {
 })
 
 axios.defaults.timeout=10000
-axios.interceptors.response.use(function (response) {
-  if(response.data.data){
-    return response.data.data
-  }else{
-    return response.data
+axios.interceptors.response.use(function (res) {
+  const errcode=res.data.errcode
+  res=res.data.data||res.data||res
+  if(errcode==C.ERR_NOTLOGIN){
+    router.replace({
+      name:'login',
+      query: {redirect: router.currentRoute.fullPath}
+    })
   }
+  return res
 }, function (error) {
   if (axios.isCancel(error)) {
     console.log('Request canceled', error.message);

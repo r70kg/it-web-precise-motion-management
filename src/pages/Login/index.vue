@@ -24,10 +24,9 @@ export default {
     async login(){
       const res=await login({body:{name:this.name,password:this.password}})
       if(this.$ISRESOK(res)){
-        this.$router.push(this.$route.query.redirect||{name:'home'})
+        this.$router.push(this.$route.query.redirect||{name:'userslist'})
       }
     }
-
   }
 }
 </script>
