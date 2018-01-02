@@ -24,10 +24,10 @@ const devWebpackConfig = merge(baseWebpackConfig, {
     clientLogLevel: 'warning',
     historyApiFallback: true,
     hot: true,
-    https: {
-      key: fs.readFileSync("./build/crt/privatekey.pem"),
-      cert: fs.readFileSync("./build/crt/certificate.pem")
-    },
+    // https: {
+    //   key: fs.readFileSync("./build/crt/privatekey.pem"),
+    //   cert: fs.readFileSync("./build/crt/certificate.pem")
+    // },
     compress: true,
     host: HOST || config.dev.host,
     port: PORT || config.dev.port,

@@ -5,6 +5,7 @@ import Tab from './Tab'
 import VertifyInput from './VertifyInput'
 import VertifyPhoto from './VertifyPhoto'
 import BreadCrumb from './BreadCrumb'
+import NormalInput from './NormalInput'
 export{
   HelloWorld,
   FilterInput,
@@ -12,5 +13,6 @@ export{
   Tab,
   VertifyInput,
   VertifyPhoto,
-  BreadCrumb
+  BreadCrumb,
+  NormalInput
 }
