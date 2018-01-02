@@ -33,7 +33,18 @@
 
     </div>
     <div class="content">
-      <div class="header">{{personInfo}}</div>
+      <div class="header">
+        <div class="avatar"><i class="iconfont icon-touxiang"></i></div>
+        <el-dropdown @command="loginOut" v-if="personInfo">
+         <span class="el-dropdown-link">
+           {{personInfo.name}}<i class="el-icon-arrow-down el-icon--right"></i>
+         </span>
+          <el-dropdown-menu slot="dropdown">
+            <el-dropdown-item >退出</el-dropdown-item>
+          </el-dropdown-menu>
+        </el-dropdown>
+
+      </div>
       <div class="main">
         <div class="bread">
           <bread-crumb :menudata="menudata"></bread-crumb>
@@ -90,8 +101,12 @@
       handleClose(key, keyPath) {
         //console.log(key, keyPath);
       },
+      loginOut(){
+        this[C.CHANGE_PERSONINFO_COMMIT](null)
+        window.location.reload()
+      },
       ...mapMutations([
-        C.FILTER_KEY_COMMIT
+        C.FILTER_KEY_COMMIT,C.CHANGE_PERSONINFO_COMMIT
       ]),
       ...mapActions([
         'getUserInfo'
@@ -102,45 +117,57 @@
 </script>
 
 <style lang="scss" scoped>
+  $blue:#08D0EE;
   #home{
     height:100%;
-  .sidebar{
-    z-index: 10001;
-    position:fixed;
-    width:2.3rem;
-    height:100%;
-  .logo{
-    background-color: white;
-    background-image: url('../../assets/logo.png');
-    background-size:100% 100%;
-    background-repeat: no-repeat;
-    width: 100%;
-    height:0.66rem;
-  }
-  .el-menu-vertical-demo{
-    min-height:100%;
-  }
-  }
-  .content{
-    display: flex;
-    flex-wrap: wrap;
-    flex-grow: 1;
-    margin-left: 2.3rem;
-  .header{
-    padding: 0rem 0.6rem;
-    width:100%;
-    height:0.66rem;
-    background: white;
-    z-index: 10001;
-    position:fixed;
-    -moz-box-shadow:0px 2px 8px #9E9E9E; -webkit-box-shadow:0px 2px 8px #9E9E9E; box-shadow:0px 2px 8px #9E9E9E;
-  }
-  .main{
-    margin-top: 0.66rem;
-    padding: 0.44rem 0.6rem;
-    width:100%;
-  }
-  }
+    .sidebar{
+      z-index: 10001;
+      position:fixed;
+      width:2.3rem;
+      height:100%;
+      .logo{
+        background-color: white;
+        background-image: url('../../assets/logo.png');
+        background-size:100% 100%;
+        background-repeat: no-repeat;
+        width: 100%;
+        height:0.66rem;
+      }
+      .el-menu-vertical-demo{
+        min-height:100%;
+      }
+    }
+    .content{
+      display: flex;
+      flex-wrap: wrap;
+      flex-grow: 1;
+      margin-left: 2.3rem;
+      position:relative;
+      .header{
+        .icon-touxiang{
+          font-size: .4rem;
+          color:rgb(0, 180, 206);
+          margin-right:.15rem;
+        }
+        color:#FF263238;
+        flex-grow: 1;
+        display:flex;
+        justify-content: flex-end;
+        align-items: center;
+        padding: 0rem 2.9rem;
+        width:100%;
+        height:0.66rem;
+        background: white;
+        z-index: 10001;
+        position:fixed;
+        -moz-box-shadow:0px 2px 8px #9E9E9E; -webkit-box-shadow:0px 2px 8px #9E9E9E; box-shadow:0px 2px 8px #9E9E9E;
+      }
+      .main{
+        margin-top: 0.66rem;
+        padding: 0.44rem 0.6rem;
+        width:100%;
+      }
+    }
   }
 
 </style>

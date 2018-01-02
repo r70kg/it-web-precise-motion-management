@@ -44,7 +44,8 @@ module.exports = {
       '@styles': resolve('src/styles'),
       '@services': resolve('src/services'),
       '@consts': resolve('src/consts'),
-      '@mixin': resolve('src/mixin')
+      '@mixin': resolve('src/mixin'),
+      '@assets':resolve('src/assets')
     }
   },
   module: {

@@ -20,6 +20,14 @@ ul,li{
 #coachvertify{
   min-width: $minwidth;
 }
+
+//下拉菜单
+.el-dropdown-menu{
+  border-radius: 0 !important;
+  min-width: 1.2rem;
+  //display:block !important;
+  z-index: 10002 !important;
+}
 //loading状态
 .el-loading-spinner .circular{
   width:.7rem;

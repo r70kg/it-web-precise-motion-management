@@ -12,6 +12,14 @@ export default {
 </script>
 
 <style>
+  @font-face {
+    font-family: 'iconfont';  /* project id 527520 */
+    src: url('//at.alicdn.com/t/font_527520_3dq1poo47sao47vi.eot');
+    src: url('//at.alicdn.com/t/font_527520_3dq1poo47sao47vi.eot?#iefix') format('embedded-opentype'),
+    url('//at.alicdn.com/t/font_527520_3dq1poo47sao47vi.woff') format('woff'),
+    url('//at.alicdn.com/t/font_527520_3dq1poo47sao47vi.ttf') format('truetype'),
+    url('//at.alicdn.com/t/font_527520_3dq1poo47sao47vi.svg#iconfont') format('svg');
+  }
 #app {
   font-family: 'Avenir', Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
