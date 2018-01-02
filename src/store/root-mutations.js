@@ -1,4 +1,5 @@
 import  C from '@consts'
+import {saveLocal} from '@utils'
 export default {
   [C.USERLIST_PAGE_CHANGE_COMMIT](state,payload){
     state.module_userlist.currentpage=payload
@@ -11,5 +12,6 @@ export default {
   },
   [C.CHANGE_PERSONINFO_COMMIT](state,payload){
     state.personInfo=payload
+    saveLocal('personInfo',state.personInfo)
   },
 }

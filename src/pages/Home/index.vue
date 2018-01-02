@@ -57,7 +57,7 @@
 </template>
 
 <script>
-  import {mapState,mapMutations,mapActions} from 'vuex'
+  import {mapGetters,mapMutations,mapActions} from 'vuex'
   import {FilterInput,BreadCrumb} from '@components'
   import  C from '@consts'
   import mixin from '@mixin'
@@ -82,13 +82,11 @@
         return  getMenu(this.$route.name)
       },
       routename(){
-        //console.log(this.menudata)
         return this.menudata[0].name
       },
-      ...mapState([
+      ...mapGetters([
         'personInfo'
       ])
-
     },
     beforeRouteUpdate(to, from, next){
       this[C.FILTER_KEY_COMMIT]('')
