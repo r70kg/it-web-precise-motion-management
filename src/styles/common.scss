@@ -21,6 +21,40 @@ ul,li{
   min-width: $minwidth;
 }
 
+//input
+#login{
+  .inputinfo{
+    width:5rem;
+    border:1px solid red;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    .demo-ruleForm{
+      border:1px solid red;
+      width:3rem;
+    }
+    input{
+      border:none;
+    }
+    .el-form-item{
+      border-bottom: 1px solid rgba(233,237,239,1);
+      &.button{
+        border-bottom:none;
+      }
+
+    }
+    .el-form-item__label{
+      width: auto !important;
+    }
+    .el-form-item__content{
+      margin-left: .4rem !important;
+    }
+
+  }
+
+}
+
+
 //下拉菜单
 .el-dropdown-menu{
   border-radius: 0 !important;
