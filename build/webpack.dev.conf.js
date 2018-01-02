@@ -1,4 +1,5 @@
 'use strict'
+const fs=require('fs')
 const utils = require('./utils')
 const webpack = require('webpack')
 const config = require('../config')
@@ -23,6 +24,10 @@ const devWebpackConfig = merge(baseWebpackConfig, {
     clientLogLevel: 'warning',
     historyApiFallback: true,
     hot: true,
+    https: {
+      key: fs.readFileSync("./build/crt/privatekey.pem"),
+      cert: fs.readFileSync("./build/crt/certificate.pem")
+    },
     compress: true,
     host: HOST || config.dev.host,
     port: PORT || config.dev.port,
@@ -67,7 +72,7 @@ module.exports = new Promise((resolve, reject) => {
       // Add FriendlyErrorsPlugin
       devWebpackConfig.plugins.push(new FriendlyErrorsPlugin({
         compilationSuccessInfo: {
-          messages: [`Your application is running here: http://${devWebpackConfig.devServer.host}:${port}`],
+          messages: [`Your application is running here: https://${devWebpackConfig.devServer.host}:${port}`],
         },
         onErrors: config.dev.notifyOnErrors
         ? utils.createNotifierCallback()
