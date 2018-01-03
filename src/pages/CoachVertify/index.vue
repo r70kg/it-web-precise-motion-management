@@ -115,9 +115,11 @@
         this.getCoachInfo(key)
       },
       changeInputStatus(index){
+        if(this.iconloading||this.iconloading) return;
         this.currentinfo[index]['status']=!this.currentinfo[index]['status']
       },
       changePhotoStatus(index1,index2,key2){
+        if(this.iconloading||this.iconloading) return;
         this.currentinfo[index1][key2][index2]['status']=!this.currentinfo[index1][key2][index2]['status']
       },
       async vertify(){
