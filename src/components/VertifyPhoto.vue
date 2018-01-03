@@ -58,10 +58,11 @@
     display:flex;
     flex-wrap:wrap;
   li{
+    //border:1px solid red;
     margin:.1rem;
     margin-top: 0;
     margin-bottom: .2rem;
-    width: 2.3rem;
+    width: 2.25rem;
     height:1.5rem;
     background: #D8D8D8;
     img{
