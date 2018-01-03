@@ -18,9 +18,9 @@
         </div>
       </li>
     </Tab>
-    <div class="footer">
-      <el-button type="primary" :loading="loadingicon1" plain round class="override" :class="active" @click="vertify(false)"><i class="iconfont icon-touxiang"></i>信息有误</el-button>
-      <el-button type="primary" :loading="loadingicon2" plain round class="override" :class="active" @click="vertify(true)"><i class="iconfont icon-touxiang"></i>审核通过</el-button>
+    <div class="footer" v-show="currentinfo">
+      <el-button type="primary" :loading="loadingicon1" plain round class="override" :disabled="culculatestatus" @click="vertify(false)"><i class="iconfont icon-touxiang"></i>信息有误</el-button>
+      <el-button type="primary" :loading="loadingicon2" plain round class="override" :disabled="!culculatestatus" @click="vertify(true)"><i class="iconfont icon-touxiang"></i>审核通过</el-button>
     </div>
     {{currentinfo}}
   </div>
@@ -68,7 +68,6 @@
         loading:true,
         loadingicon1:false,
         loadingicon2:false,
-        active:'',
         defaultkey:'basicInfo',
         currentid:this.$route.params.id,
         currentinfo:{},
