@@ -24,47 +24,24 @@
     name: 'login',
     data () {
       return {
-        name:'',
-        password:'',
+        name:'chujunfei',
+        password:'chujunfei',
         kaptcha:'',
         imgsrc:'https://boss.icarbonx.com/bossauth/captcha-image.html',
-      };
+      }
     },
-
     methods:{
       updateImg(){
         this.imgsrc=this.imgsrc+'?timestamp='+Date.now()
       },
-      submitForm(formName) {
-        this.$refs[formName].validate((valid) => {
-          if (valid) {
-            this.login()
-          } else {
-            console.log('error submit!!')
-            return false
-          }
-        })
-      },
-
       async login(){
-//          axios.post('bossauth/login.do',{
-//            userName:this.ruleForm2.name,
-//            password1:'blank',
-//            kaptcha:this.kaptcha,
-//            password:getEncrytedPwd(this.ruleForm2.name,this.ruleForm2.password,Math.random()),
-//            redirectUrl:''
-//          }).then((res)=>{
-//            console.log(res)
-//          }).catch(function (error) {
-//            console.log(error)
-//          })
         const res=await login({body:{
           userName:this.name,
-          password1:'blank',
           kaptcha:this.kaptcha,
           password:getEncrytedPwd(this.name,this.password,Math.random()),
-          redirectUrl:''
+          redirectUrl:'/'
         }})
+        console.log(res)
         if(this.$ISRESOK(res)){
           this[C.CHANGE_PERSONINFO_COMMIT](res)
           this.$router.push(this.$route.query.redirect||{name:'userslist'})
@@ -96,7 +73,7 @@
     justify-content: center;
     align-items: center;
   .normalinput+.normalinput{
-    margin-top: .5rem;
+    margin-top: .3rem;
   }
   }
   }

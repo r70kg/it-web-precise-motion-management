@@ -13,5 +13,8 @@ export default {
   [C.CHANGE_PERSONINFO_COMMIT](state,payload){
     state.personInfo=payload
     saveLocal('personInfo',state.personInfo)
+    if(!payload){
+      window.location.reload()
+    }
   },
 }

@@ -1,22 +1,27 @@
 <template>
   <div id="coachvertify">
+    {{culculatestatus}}
     <Tab :title="config.title" :defaultkey="defaultkey" :change="changeTab" >
       <li slot="tabitem" slot-scope="props" v-show="props.activekey==props.tabitem" class="slot">
         <div class="loadingcontainer" v-loading="loading">
-        <div class="left">
-          <template  v-for="(item1,index1) in currentinfo">
-            <vertify-input :label="config[props.activekey][key2]" :value="value2" :changeinputstatus="()=>changeInputStatus(index1)"  :status="item1['status']" v-for="(value2,key2) in item1"   v-if="config[props.activekey][key2]&&typeof value2!=='object'" :key="key2"></vertify-input>
-          </template>
-        </div>
+          <div class="left">
+            <template  v-for="(item1,index1) in currentinfo">
+              <vertify-input :label="config[props.activekey][key2]" :value="value2" :changeinputstatus="()=>changeInputStatus(index1)"  :status="item1['status']" v-for="(value2,key2) in item1"   v-if="config[props.activekey][key2]&&typeof value2!=='object'" :key="key2"></vertify-input>
+            </template>
+          </div>
 
-        <div class="right">
-          <template v-for="(item1,index1) in currentinfo">
-            <vertify-photo  :label="config[props.activekey][key2]" :photos="value2"  :changephotostatus="(index2)=>changePhotoStatus(index1,index2,key2)" v-for="(value2,key2) in item1" v-if="config[props.activekey][key2]&&typeof value2=='object'" :key="key2"></vertify-photo>
-          </template>
-        </div>
+          <div class="right">
+            <template v-for="(item1,index1) in currentinfo">
+              <vertify-photo  :label="config[props.activekey][key2]" :photos="value2"  :changephotostatus="(index2)=>changePhotoStatus(index1,index2,key2)" v-for="(value2,key2) in item1" v-if="config[props.activekey][key2]&&typeof value2=='object'" :key="key2"></vertify-photo>
+            </template>
+          </div>
         </div>
       </li>
     </Tab>
+    <div class="footer">
+      <el-button type="primary" :loading="loadingicon1" plain round class="override" :class="active"><i class="iconfont icon-touxiang"></i>信息有误</el-button>
+      <el-button type="primary" :loading="loadingicon2" plain round class="override" :class="active"><i class="iconfont icon-touxiang"></i>审核通过</el-button>
+    </div>
     {{currentinfo}}
   </div>
 </template>
@@ -40,41 +45,66 @@
           basicInfo:{
             name:'名字',
             sex:'性别',
-            phoneNum:'手机号码',
-            card:'省份证号',
+            phoneNum:'手机',
+            cardNum:'省份证号',
             birthday:'出生日期',
-            cardImg:'身份证照片',
-            front:'正面',
-            back:'反面'
+            cards:'身份证照片'
           },
           degreeInfo:{
             highestDegree:'最高学历',
-            graduatedUniversity:'毕业院校',
-            major:'所学专业',
-            graduatedTime:'毕业时间',
-            certificateImg:'毕业证书'
+            graduatedSchool:'毕业院校',
+            profession:'所学专业',
+            graduatedDate:'毕业时间',
+            graduatedCertifications:'毕业证书'
           },
           careerAbility:{
-            jobTime:'从业时间',
-            gym:'健身房全称(常驻)',
-            gymAddress:'健身房地址（常驻）',
-            jobCertificateImg:'从业证书',
-            qualiCertificateImg:'资格证书'
+            workDate:'从业时间',
+            gymnasiumName:'健身房全称(常驻)',
+            gymnasiumAddress:'健身房地址（常驻）',
+            workProve:'从业证书',
+            careerCertification:'资格证书'
           }
         },
         loading:true,
+        loadingicon1:false,
+        loadingicon2:false,
+        active:'',
         defaultkey:'basicInfo',
         currentid:this.$route.params.id,
         currentinfo:{},
         buttonstatus:null
       };
     },
+    computed:{
+      culculatestatus(){
+        let results=[]
+        let obj=this.currentinfo
+        for(let i in obj){
+          if(obj[i].hasOwnProperty('status')){
+            results.push(obj[i]['status'])
+          }else{
+            console.log(obj[i])
+            for(let j in obj[i]){
+              if(obj[i][j].length){
+                console.log('ahha')
+                obj[i][j].map((item)=>{
+                  results.push(item.status)
+                })
+              }
+            }
+
+          }
+        }
+        return results
+      }
+
+    },
     methods: {
       async startInit(){
         this.getCoachInfo()
       },
       async getCoachInfo(info=this.defaultkey){
-        const res=await getcoachinfo({params:{id:this.currentid},query:{info:info},loading:[this,'loading']})
+        const res=await getcoachinfo({params:{coachId:this.currentid,info:info},loading:[this,'loading']})
         this.currentinfo=res.info
       },
       changeTab(key,activekey){
@@ -89,6 +119,9 @@
       changePhotoStatus(index1,index2,key2){
         console.log((this.currentinfo[index1][key2][index2]))
         this.currentinfo[index1][key2][index2]['status']=!this.currentinfo[index1][key2][index2]['status']
+      },
+      sort(array){
+
       }
     },
     components:{Tab,VertifyInput,VertifyPhoto}
@@ -104,33 +137,34 @@
     list-style: none;
   }
   .tabbody{
-    margin:0.03rem 0;
-  li.slot{
-  .loadingcontainer{
-    width:100%;
-    height:100%;
-    padding:0.52rem 0.6rem;
-    background: white;
-    display:flex;
-    justify-content: space-between;
-  .left{
-    max-width: 4.6rem;
-    flex-grow: 1;
-  //border:1px solid red;
-  }
-  .right{
-    max-width: 6rem;
-    justify-content: flex-end;
-    margin-left: .6rem;
-    display: flex;
-    flex-wrap: wrap;
-    .photos{
-      max-width: 6rem;
+    li.slot{
+      .loadingcontainer{
+        width:100%;
+        height:100%;
+        padding:0.32rem 0.6rem;
+        background: white;
+        display:flex;
+        justify-content: space-between;
+        .left{
+          max-width: 4.6rem;
+          flex-grow: 1;
+        }
+        .right{
+          max-width: 6rem;
+          justify-content: flex-end;
+          margin-left: .6rem;
+          display: flex;
+          flex-wrap: wrap;
+          .photos{
+            max-width: 6rem;
+          }
+        }
+      }
     }
   }
+  .footer{
+    margin-top: .3rem;
+    display:flex;
+    justify-content: center;
   }
-
-  }
-  }
-
 </style>

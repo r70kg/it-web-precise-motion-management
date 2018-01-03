@@ -33,7 +33,6 @@ export default {
   },
   methods:{
     input(value){
-      console.log(value)
       this.$emit('input', value)
     }
   },
@@ -57,9 +56,9 @@ export default {
       border:none;
     }
   img{
-    height:.35rem;
-    margin-top: -0.2rem;
-    margin-left: -.1rem;
+    height:.3rem;
+    margin-top: 0rem;
+    margin-left: 0;
   }
   }
 

@@ -37,13 +37,12 @@
         <div class="avatar"><i class="iconfont icon-touxiang"></i></div>
         <el-dropdown @command="loginOut" v-if="personInfo">
          <span class="el-dropdown-link">
-           {{personInfo.name}}<i class="el-icon-arrow-down el-icon--right"></i>
+           {{personInfo.bossUser}}<i class="el-icon-arrow-down el-icon--right"></i>
          </span>
           <el-dropdown-menu slot="dropdown">
             <el-dropdown-item >退出</el-dropdown-item>
           </el-dropdown-menu>
         </el-dropdown>
-
       </div>
       <div class="main">
         <div class="bread">
@@ -101,13 +100,12 @@
       },
       loginOut(){
         this[C.CHANGE_PERSONINFO_COMMIT](null)
-        window.location.reload()
       },
       ...mapMutations([
         C.FILTER_KEY_COMMIT,C.CHANGE_PERSONINFO_COMMIT
       ]),
       ...mapActions([
-        'getUserInfo'
+        //'getUserInfo'
       ])
     },
     components:{FilterInput,BreadCrumb}

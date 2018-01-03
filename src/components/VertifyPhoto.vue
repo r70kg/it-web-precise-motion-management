@@ -2,7 +2,7 @@
   <div class="photos">
     <h6>{{label}}</h6>
     <ul class="list">
-      <li v-for="(item,index) in photos" @click="click(index)" :key=""><img /><span>{{item.status}}</span></li>
+      <li v-for="(item,index) in photos" @click="click(index)" :key=""><img :src="getimgAdress(item,index)" /><span>{{item.status}}</span></li>
     </ul>
   </div>
 </template>
@@ -28,6 +28,10 @@
     methods:{
       click(index){
         this.changephotostatus(index)
+      },
+      getimgAdress(item,index){
+        let name='img'+index
+        return item[name]
       }
     }
   }
@@ -60,6 +64,10 @@
     width: 2.3rem;
     height:1.5rem;
     background: #D8D8D8;
+    img{
+      width:100%;
+      height:100%;
+    }
   }
   }
   }

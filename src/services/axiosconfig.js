@@ -2,6 +2,8 @@ import axios from 'axios'
 import vm from '@/main.js'
 import C from '@consts'
 import router from '@router'
+import qs from 'qs'
+import store from '@store'
 
 const loading=function(data,status){
   if(data.loading){
@@ -19,22 +21,27 @@ const alertMessage=function(message='数据请求发生错误'){
   })
 }
 
+axios.defaults.timeout=10000
+axios.defaults.withCredentials = true
+axios.defaults.crossDomain = true
+
 axios.interceptors.request.use(function (config) {
+   config.headers['Content-Type'] = 'application/x-www-form-urlencoded'
+  if (config.method === 'post' && config.type !== 'json') {
+    config.data = qs.stringify(config.data)
+  }
   return config
 }, function (error) {
   alertMessage()
   return Promise.reject(error)
 })
 
-axios.defaults.timeout=10000
+
 axios.interceptors.response.use(function (res) {
   const errcode=res.data.errcode
   res=res.data.data||res.data||res
   if(errcode==C.ERR_NOTLOGIN){
-    router.replace({
-      name:'login',
-      query: {redirect: router.currentRoute.fullPath}
-    })
+    store.commit(C.CHANGE_PERSONINFO_COMMIT,null)
   }
   return res
 }, function (error) {
