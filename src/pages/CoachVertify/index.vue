@@ -2,7 +2,7 @@
   <div id="coachvertify">
     <Tab :title="config.title" :defaultkey="defaultkey" :change="changeTab" >
       <li slot="tabitem" slot-scope="props" v-show="props.activekey==props.tabitem" class="slot">
-        <div class="loadingcontainer" v-loading="loading">
+        <div class="loadingcontainer" v-loading="infoloading">
           <div class="left">
             <template  v-for="(item1,index1) in currentinfo">
               <vertify-input :info="props.activekey" :label="config[props.activekey][key2]" :value="value2" :changeinputstatus="()=>changeInputStatus(index1)"  :status="item1['status']" v-for="(value2,key2) in item1"   v-if="config[props.activekey][key2]&&typeof value2!=='object'" :key="key2"></vertify-input>
@@ -17,15 +17,15 @@
         </div>
       </li>
     </Tab>
-    <div class="footer" v-show="currentinfo">
-      <el-button type="primary" :loading="loadingunpass" plain round class="unpass" :disabled="culculatestatus" @click="vertify(false)"><i class="iconfont icon-cuo"></i>信息有误</el-button>
-      <el-button type="primary" :loading="loadingpass" plain round class="pass" :disabled="!culculatestatus" @click="vertify(true)"><i class="iconfont icon-kh_1"></i>审核通过</el-button>
+    <div class="footer" v-show="currentinfo&&infostatus=='Completed'">
+      <el-button type="primary" :loading="iconloading&&!culculatestatus" plain round class="unpass" :disabled="culculatestatus" @click="vertify"><i v-if="!iconloading" class="iconfont icon-cuo"></i>信息有误</el-button>
+      <el-button type="primary" :loading="iconloading&&culculatestatus" plain round class="pass" :disabled="!culculatestatus" @click="vertify"><i v-if="!iconloading" class="iconfont icon-kh_1"></i>审核通过</el-button>
     </div>
     <!--{{currentinfo}}-->
   </div>
 </template>
 <script>
-  import {getcoachinfo} from '@services'
+  import {getcoachinfo,validatecoachinfo} from '@services'
   import {mapState,mapMutations} from 'vuex'
   import {Tab,VertifyInput,VertifyPhoto} from '@components'
   import mixin from '@mixin'
@@ -35,6 +35,11 @@
     name:'coachvertify',
     data() {
       return {
+        sortnames:{
+          basicInfo:['name','sex','phoneNum','cardNum','birthday','cards'],
+          degreeInfo:['highestDegree','graduatedSchool','profession','graduatedDate','graduatedCertifications'],
+          careerAbility:['workDate','gymnasiumName','gymnasiumAddress','workProve', 'careerCertification']
+        },
         config: {
           title:{
             basicInfo:'基本信息',
@@ -64,13 +69,12 @@
             careerCertification:'资格证书:'
           }
         },
-        loading:true,
-        loadingunpass:false,
-        loadingpass:false,
+        infoloading:true,
+        iconloading:false,
         defaultkey:'basicInfo',
         currentid:this.$route.params.id,
         currentinfo:null,
-        buttonstatus:null
+        infostatus:null
       };
     },
     computed:{
@@ -100,11 +104,13 @@
         this.getCoachInfo()
       },
       async getCoachInfo(info=this.defaultkey){
-        const res=await getcoachinfo({params:{coachId:this.currentid,info:info},loading:[this,'loading']})
-        this.currentinfo=res.info
+        const res=await getcoachinfo({params:{coachId:this.currentid,info:info},loading:[this,'infoloading']})
+        this.infostatus=res.status
+        this.currentinfo=this.sort(res.info,info)
       },
       changeTab(key,activekey){
         if(activekey==key) return;
+        this.defaultkey=key;
         this.currentinfo=null;
         this.getCoachInfo(key)
       },
@@ -114,18 +120,23 @@
       changePhotoStatus(index1,index2,key2){
         this.currentinfo[index1][key2][index2]['status']=!this.currentinfo[index1][key2][index2]['status']
       },
-      vertify(status){
-        if(status){
-          if(!this.culculatestatus) return
-          console.log(true)
-        }
-        if(!status){
-          if(this.culculatestatus) return
-          console.log(false)
-        }
-      },
-      sort(array){
+      async vertify(){
+        await validatecoachinfo({params:{coachId:this.currentid},body:{type:this.defaultkey},loading:[this,'iconloading']})
+        await this.startInit()
 
+      },
+      sort(currentinfo,key){
+        let sort=[]
+        for(let i in this.sortnames[key]){
+          currentinfo.map((item)=>{
+            for(let j in item){
+              if(this.sortnames[key][i]==j){
+                sort.push(item)
+              }
+            }
+          })
+        }
+        return sort
       }
     },
     components:{Tab,VertifyInput,VertifyPhoto}

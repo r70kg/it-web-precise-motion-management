@@ -16,4 +16,7 @@ export const getcoachlist=(payload={query:{page}})=>{
 export const getcoachinfo=(payload={params:{id},query:{info}})=>{
   return request(C.GET_COACH_INFO,'get',payload)
 }
+export const validatecoachinfo=(payload)=>{
+  return request(C.VALIDATION_COACH_INFO,'put',payload)
+}
 
