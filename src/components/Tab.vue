@@ -53,8 +53,10 @@
     li{
       padding:10px 0;
       margin:0 0.6rem;
+      font-size: .2rem;
       &.active{
-        border-bottom:2px solid $blue;
+        color:#263238;
+        border-bottom:.04rem solid $blue;
       }
     }
   }

@@ -26,7 +26,7 @@ axios.defaults.withCredentials = true
 axios.defaults.crossDomain = true
 
 axios.interceptors.request.use(function (config) {
-   config.headers['Content-Type'] = 'application/x-www-form-urlencoded'
+  config.headers['Content-Type'] = 'application/x-www-form-urlencoded'
   if (config.method === 'post' && config.type !== 'json') {
     config.data = qs.stringify(config.data)
   }

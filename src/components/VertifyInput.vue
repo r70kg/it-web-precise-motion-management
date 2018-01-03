@@ -1,5 +1,5 @@
 <template>
-  <div class="inputcontainer" @click="click()">
+  <div class="inputcontainer" @click="click()" :class="{'error':!status}">
     <label :class="info">{{label}}</label>
     <div  class="content" readonly="readonly">{{value}}</div>
     <div class="tanhao" v-if="!status"><i class="iconfont icon-tanhao"></i></div>
@@ -51,6 +51,9 @@
     width:100%;
     padding: 0.30rem 0 0.30rem 0;
     border-bottom: 1px solid rgba(0,178,231,1);
+    &.error{
+      border-bottom:1px solid #FC7563;
+    }
     label{
       //border:1px solid red;
       height:.28rem;
