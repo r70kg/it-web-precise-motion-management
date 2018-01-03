@@ -19,8 +19,8 @@
       </li>
     </Tab>
     <div class="footer">
-      <el-button type="primary" :loading="loadingicon1" plain round class="override" :class="active"><i class="iconfont icon-touxiang"></i>信息有误</el-button>
-      <el-button type="primary" :loading="loadingicon2" plain round class="override" :class="active"><i class="iconfont icon-touxiang"></i>审核通过</el-button>
+      <el-button type="primary" :loading="loadingicon1" plain round class="override" :class="active" @click="vertify(false)"><i class="iconfont icon-touxiang"></i>信息有误</el-button>
+      <el-button type="primary" :loading="loadingicon2" plain round class="override" :class="active" @click="vertify(true)"><i class="iconfont icon-touxiang"></i>审核通过</el-button>
     </div>
     {{currentinfo}}
   </div>
@@ -83,21 +83,19 @@
           if(obj[i].hasOwnProperty('status')){
             results.push(obj[i]['status'])
           }else{
-            console.log(obj[i])
             for(let j in obj[i]){
               if(obj[i][j].length){
-                console.log('ahha')
                 obj[i][j].map((item)=>{
                   results.push(item.status)
                 })
               }
             }
-
           }
         }
-        return results
+        results=results.filter((item)=>{return !item})
+        if(results.length) return false
+        return true
       }
-
     },
     methods: {
       async startInit(){
@@ -109,16 +107,24 @@
       },
       changeTab(key,activekey){
         if(activekey==key) return;
-        //this.currentinfo=null;
+        this.currentinfo=null;
         this.getCoachInfo(key)
       },
       changeInputStatus(index){
-        console.log((this.currentinfo[index]))
         this.currentinfo[index]['status']=!this.currentinfo[index]['status']
       },
       changePhotoStatus(index1,index2,key2){
-        console.log((this.currentinfo[index1][key2][index2]))
         this.currentinfo[index1][key2][index2]['status']=!this.currentinfo[index1][key2][index2]['status']
+      },
+      vertify(status){
+        if(status){
+          if(!this.culculatestatus) return
+          console.log(true)
+        }
+        if(!status){
+          if(this.culculatestatus) return
+          console.log(false)
+        }
       },
       sort(array){
 
