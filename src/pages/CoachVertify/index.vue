@@ -6,7 +6,7 @@
         <div class="loadingcontainer" v-loading="loading">
           <div class="left">
             <template  v-for="(item1,index1) in currentinfo">
-              <vertify-input :label="config[props.activekey][key2]" :value="value2" :changeinputstatus="()=>changeInputStatus(index1)"  :status="item1['status']" v-for="(value2,key2) in item1"   v-if="config[props.activekey][key2]&&typeof value2!=='object'" :key="key2"></vertify-input>
+              <vertify-input :info="props.activekey" :label="config[props.activekey][key2]" :value="value2" :changeinputstatus="()=>changeInputStatus(index1)"  :status="item1['status']" v-for="(value2,key2) in item1"   v-if="config[props.activekey][key2]&&typeof value2!=='object'" :key="key2"></vertify-input>
             </template>
           </div>
 
@@ -43,26 +43,26 @@
             careerAbility:'职业资质'
           },
           basicInfo:{
-            name:'名字',
-            sex:'性别',
-            phoneNum:'手机',
-            cardNum:'省份证号',
-            birthday:'出生日期',
-            cards:'身份证照片'
+            name:'名字:',
+            sex:'性别:',
+            phoneNum:'手机:',
+            cardNum:'省份证号:',
+            birthday:'出生日期:',
+            cards:'身份证照片:'
           },
           degreeInfo:{
-            highestDegree:'最高学历',
-            graduatedSchool:'毕业院校',
-            profession:'所学专业',
-            graduatedDate:'毕业时间',
-            graduatedCertifications:'毕业证书'
+            highestDegree:'最高学历:',
+            graduatedSchool:'毕业院校:',
+            profession:'所学专业:',
+            graduatedDate:'毕业时间:',
+            graduatedCertifications:'毕业证书:'
           },
           careerAbility:{
-            workDate:'从业时间',
-            gymnasiumName:'健身房全称(常驻)',
-            gymnasiumAddress:'健身房地址（常驻）',
-            workProve:'从业证书',
-            careerCertification:'资格证书'
+            workDate:'从业时间:',
+            gymnasiumName:'健身房全称(常驻):',
+            gymnasiumAddress:'健身房地址(常驻):',
+            workProve:'从业证书:',
+            careerCertification:'资格证书:'
           }
         },
         loading:true,
