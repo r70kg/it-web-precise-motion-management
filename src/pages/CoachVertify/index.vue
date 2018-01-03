@@ -19,10 +19,10 @@
       </li>
     </Tab>
     <div class="footer" v-show="currentinfo">
-      <el-button type="primary" :loading="loadingicon1" plain round class="override" :disabled="culculatestatus" @click="vertify(false)"><i class="iconfont icon-touxiang"></i>信息有误</el-button>
-      <el-button type="primary" :loading="loadingicon2" plain round class="override" :disabled="!culculatestatus" @click="vertify(true)"><i class="iconfont icon-touxiang"></i>审核通过</el-button>
+      <el-button type="primary" :loading="loadingunpass" plain round class="unpass" :disabled="culculatestatus" @click="vertify(false)"><i class="iconfont icon-cuo"></i>信息有误</el-button>
+      <el-button type="primary" :loading="loadingpass" plain round class="pass" :disabled="!culculatestatus" @click="vertify(true)"><i class="iconfont icon-kh_1"></i>审核通过</el-button>
     </div>
-    {{currentinfo}}
+    <!--{{currentinfo}}-->
   </div>
 </template>
 <script>
@@ -66,11 +66,11 @@
           }
         },
         loading:true,
-        loadingicon1:false,
-        loadingicon2:false,
+        loadingunpass:false,
+        loadingpass:false,
         defaultkey:'basicInfo',
         currentid:this.$route.params.id,
-        currentinfo:{},
+        currentinfo:null,
         buttonstatus:null
       };
     },
@@ -171,5 +171,30 @@
     margin-top: .3rem;
     display:flex;
     justify-content: center;
+    .el-button--primary.is-plain.pass{
+      background-color: #74D578;
+      color:white;
+    }
+    .el-button--primary.is-plain.unpass{
+      color:white;
+      background-color: #FC7563;
+    }
+    .el-button--primary.is-plain{
+      padding:.2rem .35rem;
+      border-radius: .5rem;
+      border:none;
+      font-size: .2rem;
+      &:disabled{
+        border:1px solid #D8E0E4;
+        color:#D8E0E4;
+        background-color:transparent;
+      }
+      i{
+        margin-right:.1rem;
+      }
+    }
+    .el-button--primary+.el-button--primary{
+      margin-left: .5rem;
+    }
   }
 </style>
