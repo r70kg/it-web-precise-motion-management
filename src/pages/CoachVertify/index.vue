@@ -1,6 +1,5 @@
 <template>
   <div id="coachvertify">
-    {{culculatestatus}}
     <Tab :title="config.title" :defaultkey="defaultkey" :change="changeTab" >
       <li slot="tabitem" slot-scope="props" v-show="props.activekey==props.tabitem" class="slot">
         <div class="loadingcontainer" v-loading="loading">
