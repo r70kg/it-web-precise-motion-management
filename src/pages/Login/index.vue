@@ -28,8 +28,8 @@
     data () {
       return {
         //chujunfei
-        name:'',
-        password:'',
+        name:'chujunfei',
+        password:'chujunfei',
         kaptcha:'',
         imgsrc:'https://boss.icarbonx.com/bossauth/captcha-image.html',
       }

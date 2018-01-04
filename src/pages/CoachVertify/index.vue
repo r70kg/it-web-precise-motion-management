@@ -38,13 +38,13 @@
         sortnames:{
           basicInfo:['name','sex','phoneNum','cardNum','birthday','cards'],
           degreeInfo:['highestDegree','graduatedSchool','profession','graduatedDate','graduatedCertifications'],
-          careerAbility:['workDate','gymnasiumName','gymnasiumAddress','workProve', 'careerCertification']
+          careerInfo:['workDate','gymnasiumName','gymnasiumAddress','workProve', 'careerCertification']
         },
         config: {
           title:{
             basicInfo:'基本信息',
             degreeInfo:'学历信息',
-            careerAbility:'职业资质'
+            careerInfo:'职业资质'
           },
           basicInfo:{
             name:'名字:',
@@ -61,7 +61,7 @@
             graduatedDate:'毕业时间:',
             graduatedCertifications:'毕业证书:'
           },
-          careerAbility:{
+          careerInfo:{
             workDate:'从业时间:',
             gymnasiumName:'健身房全称(常驻):',
             gymnasiumAddress:'健身房地址(常驻):',
@@ -125,7 +125,6 @@
       async vertify(){
         await validatecoachinfo({params:{coachId:this.currentid},body:{type:this.defaultkey},loading:[this,'iconloading']})
         await this.startInit()
-
       },
       sort(currentinfo,key){
         let sort=[]

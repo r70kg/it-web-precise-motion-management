@@ -61,7 +61,7 @@
       align-items: center;
       //border:1px solid red;
       width:.8rem;
-      &.careerAbility{
+      &.careerInfo{
         width:1.6rem;
       }
 
