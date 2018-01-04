@@ -9,25 +9,33 @@
         @open="handleOpen"
         @close="handleClose"
         background-color="#263238"
-        text-color="#fff"
-        active-text-color="#ffd04b">
-        <el-submenu index="index">
+        text-color="rgba(133,151,161,1)"
+        active-text-color="white">
+        <el-menu-item index="index0" route="/">
+          <i class="iconfont icon-wenben"></i>
+          <span slot="title">概览</span>
+        </el-menu-item>
+        <el-submenu index="index1" route="">
           <template slot="title">
-            <i class="el-icon-location"></i>
+            <i class="iconfont icon-yonghu"></i>
             <span>用户管理</span>
           </template>
           <el-menu-item-group>
-            <el-menu-item index="userslist" route="/userslist">用户列表</el-menu-item>
-            <el-menu-item index="coachlist" route="/coachlist">教练列表</el-menu-item>
+            <el-menu-item  index="userslist" route="/userslist"><span>用户列表</span></el-menu-item>
+            <el-menu-item index="coachlist" route="/coachlist"><span>教练列表</span></el-menu-item>
           </el-menu-item-group>
         </el-submenu>
-        <el-menu-item index="2" route="">
-          <i class="el-icon-menu"></i>
-          <span slot="title">导航二</span>
+        <el-menu-item index="index2" route="">
+          <i class="iconfont icon-wenben"></i>
+          <span slot="title">内容管理</span>
         </el-menu-item>
-        <el-menu-item index="3">
-          <i class="el-icon-setting"></i>
-          <span slot="title">导航三</span>
+        <el-menu-item index="index3" route="">
+          <i class="iconfont icon-iconset0272"></i>
+          <span slot="title">活动管理</span>
+        </el-menu-item>
+        <el-menu-item index="index4" route="">
+          <i class="iconfont icon-gongju"></i>
+          <span slot="title">工具</span>
         </el-menu-item>
       </el-menu>
 
@@ -66,6 +74,7 @@
     mixins: [mixin],
     data () {
       return {
+        activeindex:'index1'
       }
     },
     computed:{
@@ -93,10 +102,10 @@
     },
     methods:{
       handleOpen(key, keyPath) {
-        //console.log(key, keyPath);
+        //this.activeindex=key
       },
       handleClose(key, keyPath) {
-        //console.log(key, keyPath);
+        //this.activeindex=null
       },
       loginOut(){
         this[C.CHANGE_PERSONINFO_COMMIT](null)
@@ -164,6 +173,81 @@
         width:100%;
       }
     }
+
+    .el-submenu{
+      &.is-opened{
+        .el-menu-item{
+          &.is-active{
+            span{
+              padding-left: .05rem;
+              border-left:2px solid white !important;
+              color:white !important;
+            }
+          }
+          padding-left: .6rem !important;
+          margin-top: 0;
+        }
+        .el-submenu__title{
+
+          i{
+            color:rgba(8,208,238,1);
+          }
+          span{
+            //color:white;
+          }
+        }
+      }
+      .el-submenu__title{
+        i{
+          color:rgba(133,151,161,1);
+          margin-right: .1rem;
+          font-size: .2rem;
+          //font
+        }
+        span{
+          font-size: .17rem;
+          //color:white;
+        }
+      }
+    }
+    .el-menu-item{
+      margin-top: .12rem;
+      i{
+        //font-weight: bold;
+        color:rgba(133,151,161,1);
+        margin-right: .1rem;
+        font-size: .2rem;
+        //font
+      }
+      span{
+        font-size: .17rem;
+        //color:red;
+        //color:#979797;
+      }
+    }
+
+  }
+
+</style>
+<style>
+  .el-menu-vertical-demo{
+    padding-top: .2rem;
+  }
+  .el-menu-item-group__title{
+
+    padding: 0;
+  }
+  .el-submenu__icon-arrow{
+    right:.7rem;
+  }
+  .el-menu-item, .el-submenu__title{
+    height:.5rem;
+  }
+  .el-submenu .el-menu-item{
+    height:.35rem;
+  }
+  .el-submenu .el-menu{
+    //margin-left: .18rem;
   }
 
 </style>
