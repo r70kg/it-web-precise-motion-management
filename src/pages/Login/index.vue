@@ -8,8 +8,7 @@
         <normal-input type='password' icon="icon-suo" placeholder="密码" v-model="password" :status="statuspassword" :errmsg="errpasswordmsg" :onblur="checkPassword"></normal-input>
         <normal-input  placeholder="验证码" v-model="kaptcha" :status="statuskaptcha" :errmsg="errkaptchamsg" :onblur="checkKaptcha" :src="imgsrc" :updateimg="updateImg" ></normal-input>
         <div class="submit">
-          <el-button type="primary"  plain round class="unpass"  @click="login">登陆</el-button>
-          <!--<el-button type="primary" :loading="iconloading" plain round class="unpass" :disabled="culculatestatus" @click="login">登陆</el-button>-->
+          <el-button type="primary" :loading="iconloading" plain round class="unpass"  @click="login">登陆</el-button>
         </div>
       </div>
     </div>
@@ -28,9 +27,9 @@
     data () {
       return {
         //chujunfei
-        name:'',
-        password:'',
-        kaptcha:'',
+        name:'chujunfei',
+        password:'chujunfei',
+        kaptcha:'1234',
         statusname:null,
         statuspassword:null,
         statuskaptcha:null,
@@ -38,6 +37,7 @@
         errnamemsg:'',
         errkaptchamsg:'',
         imgsrc:'https://boss.icarbonx.com/bossauth/captcha-image.html',
+        iconloading:false
       }
     },
     methods:{
@@ -75,18 +75,23 @@
           this.errkaptchamsg=''
           return true
         }
-
       },
       updateImg(){
         this.imgsrc=this.imgsrc+'?timestamp='+Date.now()
       },
+      checkStatus(){
+        if(!(this.checkName()&&this.checkPassword()&&this.checkKaptcha())){
+          return false
+        }
+      },
       async login(){
+        this.checkStatus()
         const res=await login({body:{
           userName:this.name,
           kaptcha:this.kaptcha,
           password:getEncrytedPwd(this.name,this.password,Math.random()),
           redirectUrl:'/'
-        }})
+        },loading:[this,'iconloading']})
         if(this.$ISRESOK(res)){
           this[C.CHANGE_PERSONINFO_COMMIT](res)
           this.$router.push(this.$route.query.redirect||{name:'userslist'})
@@ -149,13 +154,15 @@
     justify-content: center;
   button{
     font-size: .2rem;
-    letter-spacing: .1rem;
     background-color: rgba(8,208,238,1);
     color:white;
     border:none;
     width:2rem;
     border-radius: 1rem;
     padding:.2rem 0;
+    span{
+      letter-spacing: .1rem;
+    }
   }
   }
   }

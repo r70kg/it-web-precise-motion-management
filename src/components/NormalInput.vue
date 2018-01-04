@@ -6,7 +6,7 @@
       <img :src="src" @click="updateimg" v-if="src" :class="{'marginleft':status!==null}" />
       <div class="statusicon" v-if="status!==null"><i class="iconfont icon-asmkticon0250" v-if="status"></i><i class="iconfont icon-asmkticon0246" v-if="!status"></i></div>
     </div>
-    <div class="errmsg" v-if="errmsg">{{errmsg}}</div>
+    <div class="errmsg" v-if="errmsg">*{{errmsg}}</div>
   </div>
 </template>
 
