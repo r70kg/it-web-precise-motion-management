@@ -11,11 +11,11 @@
         background-color="#263238"
         text-color="rgba(133,151,161,1)"
         active-text-color="white">
-        <el-menu-item index="index0" route="/">
-          <i class="iconfont icon-wenben"></i>
+        <el-menu-item index="index0" :route="routename">
+          <i class="iconfont icon-weibiaoti1"></i>
           <span slot="title">概览</span>
         </el-menu-item>
-        <el-submenu index="index1" route="">
+        <el-submenu index="index1" route="/">
           <template slot="title">
             <i class="iconfont icon-yonghu"></i>
             <span>用户管理</span>
@@ -25,15 +25,15 @@
             <el-menu-item index="coachlist" route="/coachlist"><span>教练列表</span></el-menu-item>
           </el-menu-item-group>
         </el-submenu>
-        <el-menu-item index="index2" route="">
+        <el-menu-item index="index2" :route="routename">
           <i class="iconfont icon-wenben"></i>
           <span slot="title">内容管理</span>
         </el-menu-item>
-        <el-menu-item index="index3" route="">
+        <el-menu-item index="index3" :route="routename">
           <i class="iconfont icon-iconset0272"></i>
           <span slot="title">活动管理</span>
         </el-menu-item>
-        <el-menu-item index="index4" route="">
+        <el-menu-item index="index4" :route="routename">
           <i class="iconfont icon-gongju"></i>
           <span slot="title">工具</span>
         </el-menu-item>
