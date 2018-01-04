@@ -3,11 +3,14 @@
     <img src="../../assets/bg_login1.png">
     <div class="inputinfo">
       <div>
-        <div class="avatar"></div>
-        <normal-input icon="icon-yonghu" placeholder="用户名" v-model="name"></normal-input>
+        <div class="avatar"><div><i class="iconfont icon-yonghu"></i></div></div>
+        <normal-input type='text' icon="icon-yonghu" placeholder="用户名" v-model="name" :onblur="onblur"></normal-input>
         <normal-input type='password' icon="icon-suo" placeholder="密码" v-model="password"></normal-input>
-        <normal-input  icon="" placeholder="验证码" v-model="kaptcha" :src="imgsrc" :updateimg="updateImg"></normal-input>
-        <button @click="login">点击</button>
+        <normal-input  placeholder="验证码" v-model="kaptcha" :src="imgsrc" :updateimg="updateImg"></normal-input>
+        <div class="submit">
+          <el-button type="primary"  plain round class="unpass"  @click="login">登陆</el-button>
+          <!--<el-button type="primary" :loading="iconloading" plain round class="unpass" :disabled="culculatestatus" @click="login">登陆</el-button>-->
+        </div>
       </div>
     </div>
   </div>
@@ -24,13 +27,17 @@
     name: 'login',
     data () {
       return {
-        name:'chujunfei',
-        password:'chujunfei',
+        //chujunfei
+        name:'',
+        password:'',
         kaptcha:'',
         imgsrc:'https://boss.icarbonx.com/bossauth/captcha-image.html',
       }
     },
     methods:{
+      onblur(status){
+        return true
+      },
       updateImg(){
         this.imgsrc=this.imgsrc+'?timestamp='+Date.now()
       },
@@ -63,19 +70,54 @@
     display:flex;
     justify-content: flex-end;
     position:relative;
-  .inputinfo{
-    position:absolute;
-    background: transparent;
-    width:5.1rem;
-    height:100%;
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: center;
-    align-items: center;
-  .normalinput+.normalinput{
-    margin-top: .3rem;
-  }
-  }
+    .inputinfo{
+      .avatar{
+        display:flex;
+        justify-content: center;
+        margin-bottom: .6rem;
+        div{
+          i{
+            font-size: .3rem;
+            font-weight: bold;
+          }
+          display:flex;
+          justify-content: center;
+          align-items: center;
+          height:.6rem;
+          width:.6rem;
+          border-radius: 5rem;
+          background-color: rgba(234,238,240,1);
+        }
+        //border:1px solid red;
+      }
+      position:absolute;
+      background: transparent;
+      width:5.1rem;
+      height:100%;
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      align-items: center;
+      .normalinput+.normalinput{
+        margin-top: .3rem;
+      }
+      .submit{
+        margin-top: .3rem;
+        width:100% !important;
+        display:flex;
+        justify-content: center;
+        button{
+          font-size: .2rem;
+          letter-spacing: .1rem;
+          background-color: rgba(8,208,238,1);
+          color:white;
+          border:none;
+          width:2rem;
+          border-radius: 1rem;
+          padding:.2rem 0;
+        }
+      }
+    }
   }
 </style>
 <style>
