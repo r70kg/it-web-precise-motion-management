@@ -5,7 +5,7 @@
         <div class="loadingcontainer" v-loading="infoloading">
           <div class="left">
             <template  v-for="(item1,index1) in currentinfo">
-              <vertify-input :info="props.activekey" :label="config[props.activekey][key2]" :value="value2" :changeinputstatus="()=>changeInputStatus(index1)"  :status="item1['status']" v-for="(value2,key2) in item1"   v-if="config[props.activekey][key2]&&typeof value2!=='object'" :key="key2"></vertify-input>
+              <vertify-input :info="props.activekey" :label="config[props.activekey][key2]" :value="value2|filterinput(key2)" :changeinputstatus="()=>changeInputStatus(index1)"  :status="item1['status']" v-for="(value2,key2) in item1"   v-if="config[props.activekey][key2]&&typeof value2!=='object'" :key="key2"></vertify-input>
             </template>
           </div>
 
@@ -21,10 +21,11 @@
       <el-button type="primary" :loading="iconloading&&!culculatestatus" plain round class="unpass" :disabled="culculatestatus" @click="vertify"><i v-if="!iconloading" class="iconfont icon-cuo"></i>信息有误</el-button>
       <el-button type="primary" :loading="iconloading&&culculatestatus" plain round class="pass" :disabled="!culculatestatus" @click="vertify"><i v-if="!iconloading" class="iconfont icon-kh_1"></i>审核通过</el-button>
     </div>
-    <!--{{currentinfo}}-->
+    {{currentinfo}}
   </div>
 </template>
 <script>
+  import moment from 'moment'
   import {getcoachinfo,validatecoachinfo} from '@services'
   import {mapState,mapMutations} from 'vuex'
   import {Tab,VertifyInput,VertifyPhoto} from '@components'
@@ -138,6 +139,19 @@
           })
         }
         return sort
+      }
+    },
+    filters: {
+      filterinput: function (value,key) {
+        if(key=='sex'){
+          value=0?value='男':value='女'
+        }
+        key=='birthday'?value=moment(value).format("YYYY.MM.DD"):''
+        key=='graduatedDate'?value=moment(value).format("YYYY.MM.DD"):''
+        if(key=='workDate'){
+          value=`${value}年`
+        }
+        return value
       }
     },
     components:{Tab,VertifyInput,VertifyPhoto}
