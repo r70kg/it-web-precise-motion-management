@@ -93,6 +93,8 @@ function request(url='',type='get',data={},config={}){
     //绑定到当前请求的加载状态结束加载状态
     loading(data,false)
     return res
+  }).catch((err)=>{
+    loading(data,false)
   })
 }
 
