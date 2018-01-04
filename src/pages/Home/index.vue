@@ -226,10 +226,19 @@
       }
     }
 
+
   }
 
 </style>
 <style>
+  .el-breadcrumb__separator{
+    background-color: #979797;
+    color:white;
+    font-size: .15rem;
+    padding:.02rem;
+    border-radius:.5rem;
+  }
+
   .el-menu-vertical-demo{
     padding-top: .2rem;
   }

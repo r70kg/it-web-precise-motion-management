@@ -4,7 +4,7 @@
       <el-table-column
         label="操作">
         <template slot-scope="scope">
-          <el-button @click="handleClick(scope.row)" type="text" size="small">审查</el-button>
+          <el-button @click="handleClick(scope.row)" type="text" size="small"><i class="iconfont icon-dunpai"></i></el-button>
         </template>
       </el-table-column>
     </ele-table>
