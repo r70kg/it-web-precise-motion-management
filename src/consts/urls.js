@@ -2,7 +2,7 @@
 const LOGIN='/user/login'
 const GET_COACH_INFO='/user/coach/{coachId}/{info}'
 const GET_USER_LIST='/user/getAllUsersInfo'
-const GET_COACH_LIST='/user/getAllCoachesInfo'
+const GET_COACH_LIST='/user/coaches/info/{currentPage}'
 const VALIDATION_COACH_INFO='/user/coach/validation/{coachId}/info'
 
 // const LOGIN='https://boss.icarbonx.com/bossauth/mlogin.do'

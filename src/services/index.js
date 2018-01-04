@@ -10,7 +10,7 @@ export const get_user_info=(payload)=>{
 export const getuserlist=(payload={query:{page}})=>{
   return request(C.GET_USER_LIST,'get',payload)
 }
-export const getcoachlist=(payload={query:{page}})=>{
+export const getcoachlist=(payload)=>{
   return request(C.GET_COACH_LIST,'get',payload)
 }
 export const getcoachinfo=(payload={params:{id},query:{info}})=>{
