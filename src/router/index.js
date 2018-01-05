@@ -9,7 +9,6 @@ router.beforeEach((to, from, next) => {
     if(store.getters.personInfo){
       next()
     }else{
-      // next()
       next({
         name:'login',
         query: {redirect: to.fullPath}

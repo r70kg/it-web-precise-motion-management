@@ -24,8 +24,8 @@
           {prop:'id',label:'ID',width:this.percent},
           {prop:'name',label:'姓名',width:this.percent},
           {prop:'phoneNum',label:'手机号',width:this.percent},
-          {prop:'timeRegister',label:'注册时间',width:this.percent},
-          {prop:'timeActive',label:'活跃时间',width:this.percent}
+          {prop:'registerTime',label:'注册时间',width:this.percent},
+          {prop:'updateTime',label:'活跃时间',width:this.percent}
         ],
         loading:true
       }
@@ -46,9 +46,9 @@
         this[C.USERLIST_PAGE_CHANGE_COMMIT](currentPage)
       },
       async getAllUsersInfo(pagenum=this.currentpage){
-        const res=await getuserlist({query:{page:pagenum},loading:[this,'loading']})
-        this.tableData=res.tableData
-        this.totalnum=res.totalNum
+        const res=await getuserlist({params:{currentPage:pagenum},loading:[this,'loading']})
+        this.tableData=res.resultSet
+        this.totalnum=res.count
         this.pagesize=res.pageSize
       },
       handleClick(row) {
