@@ -122,4 +122,34 @@ td.name{
     color:#263238;
   }
 }
+td.status{
+  &.WaitingCertificated{
+    .cell{
+      color: #08D0EE;
+    }
+  }
+  &.CertificateSuccessed{
+    .cell{
+      color: #74D578;
+    }
+  }
+  &.CertificateFailed{
+    .cell{
+      color:#FC7563;
+    }
+  }
+  &.NoCertificated{
+    .cell{
+      color:'#8597A1';
+    }
+  }
+
+}
+.el-table td, .el-table th{
+  padding: auto .2rem !important;
+}
+.el-table .cell{
+  color:#8597A1;
+  font-size: .15rem;
+}
 

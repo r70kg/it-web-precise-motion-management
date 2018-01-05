@@ -1,7 +1,6 @@
 import {mapState,mapGetters,mapMutations} from 'vuex'
 import mixin from './mixin.js'
 import {EleTable} from '@components'
-import  C from '@consts'
 import {timeformer} from "../utils/index";
 export default {
   mixins: [mixin],
@@ -70,10 +69,10 @@ export default {
             return '未通过'
         }
       }
-      if(row.status&&column.property=='registerTime'){
+      if(column.property=='registerTime'){
         return timeformer(cellValue)
       }
-      if(row.status&&column.property=='updateTime'){
+      if(column.property=='updateTime'){
         return timeformer(cellValue)
       }
       return cellValue

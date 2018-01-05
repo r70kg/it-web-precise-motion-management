@@ -1,6 +1,6 @@
 <template >
   <div id="userlist">
-    <ele-table :tableData="filtertableData" :tableconfig="tableconfig" :pagechange="pageChange" :totalnum="filtertotalnum" :pagesize="pagesize" :page-size="pagesize" :currentpage="currentpage" :loading="loading">
+    <ele-table :tableData="filtertableData" :tableconfig="tableconfig" :pagechange="pageChange" :totalnum="filtertotalnum" :pagesize="pagesize" :page-size="pagesize" :currentpage="currentpage" :loading="loading" :formatter="formatter">
       <el-table-column
       label="操作" class-name="operation">
       <template slot-scope="scope">
