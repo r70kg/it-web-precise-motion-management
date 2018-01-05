@@ -10,7 +10,7 @@
       v-loading="loading"
       :class="tableclass"
     >
-      <el-table-column :prop='item.prop' :label="item.label" :width="item.width" v-for="item in tableconfig" :key="item.id" :class-name="item.prop">
+      <el-table-column :prop='item.prop' :label="item.label" :width="item.width" v-for="item in tableconfig" :key="item.id" :class-name="item.prop" :formatter="formatter">
       </el-table-column>
       <slot></slot>
     </el-table>
@@ -60,6 +60,9 @@
         default:true
       },
       setCellClass:{
+        type:Function
+      },
+      formatter:{
         type:Function
       }
     },

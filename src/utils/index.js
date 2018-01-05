@@ -3,6 +3,7 @@ import './rem.js'
 import './normalize.css'
 import Plugins from './plugins.js'
 import md5js from './jquery.md5.js'
+import moment from 'moment'
 
 Vue.use(Plugins)
 
@@ -12,6 +13,10 @@ export const saveLocal=(name,value)=>{
 
 export const getLocal=(name)=>{
   return JSON.parse(localStorage.getItem(name))
+}
+
+export const timeformer=(timestamp)=>{
+  return moment(timestamp).format("YYYY.MM.DD")
 }
 
 export const md5=md5js
@@ -135,6 +140,8 @@ export const getEncrytedPwd=(username,pwd,randomKey)=>{
   const timestamp = Math.floor(Date.now() / 1000)
   return XTEA.encrypt(username + "," + pwdMd5 + "," + timestamp + "," + randomKey, S2);
 }
+
+
 
 
 

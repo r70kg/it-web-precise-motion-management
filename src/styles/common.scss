@@ -21,7 +21,20 @@ ul,li{
   min-width: $minwidth;
 }
 
-
+//tooltip
+.el-tooltip__popper.is-dark{
+  padding:.1rem .3rem;
+  border-radius:0px;
+  background-color: #FFFFFF;
+  color: #263238;
+  box-shadow: 0 6px 12px 0 rgba(0,0,0,0.15);
+}
+.el-tooltip__popper[x-placement^=top] .popper__arrow{
+  border-top-color: #FFFFFF;
+}
+.el-tooltip__popper[x-placement^=top] .popper__arrow::after{
+  border-top-color: #FFFFFF;
+}
 
 //下拉菜单
 .el-dropdown-menu{
@@ -80,5 +93,33 @@ tr.coolcolor{
 }
 .el-submenu .el-menu-item{
   min-width: auto !important;
+}
+
+.el-button--text{
+  &:hover{
+    background: #ECEFF1;
+    color:#8597A1;;
+  }
+
+  &.WaitingCertificated{
+    background-color: #08D0EE;
+    color:white;
+  }
+  background-color: #ECEFF1;
+  color:#8597A1;
+  width:.4rem;
+  height:.4rem;
+  border-radius:.5rem;
+  .iconfont{
+    //font-weight: bold;
+    font-size: .22rem;
+  }
+}
+td.name{
+  .cell{
+    font-size:.15rem;
+    font-weight: bold;
+    color:#263238;
+  }
 }
 

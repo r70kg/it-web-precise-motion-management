@@ -2,6 +2,7 @@ import {mapState,mapGetters,mapMutations} from 'vuex'
 import mixin from './mixin.js'
 import {EleTable} from '@components'
 import  C from '@consts'
+import {timeformer} from "../utils/index";
 export default {
   mixins: [mixin],
   data() {
@@ -52,7 +53,31 @@ export default {
       //this.$router.push({name:'coachvertify',params: {id:1}})
       //console.log(row);
     },
-    //...mapMutations([C.USERLIST_PAGE_CHANGE_COMMIT])
+    //...mapMutations([C.USERLIST_PAGE_CHANGE_COMMIT]),
+    formatter(row, column, cellValue){
+      if(row.status&&column.property=='status') {
+        switch (cellValue){
+          case 'NoCertificated':
+            return '未完成'
+            break;
+          case 'CertificateSuccessed':
+            return '已核实'
+            break;
+          case 'WaitingCertificated':
+            return '待审核'
+            break;
+          case 'CertificateFailed':
+            return '未通过'
+        }
+      }
+      if(row.status&&column.property=='registerTime'){
+        return timeformer(cellValue)
+      }
+      if(row.status&&column.property=='updateTime'){
+        return timeformer(cellValue)
+      }
+      return cellValue
+    },
   },
   components:{EleTable}
 }

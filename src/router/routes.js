@@ -3,9 +3,11 @@ import Router from 'vue-router'
 Vue.use(Router)
 
 const router=new Router({
+  mode: 'history',
   routes: [
     {
       path: '/',
+      redirect: { name: 'userslist' },
       name: 'home',
       component: (resolve)=>{require(['@pages/Home'],resolve)},
       children:[
@@ -32,6 +34,10 @@ const router=new Router({
       meta:{requireAuth:false},
       component:(resolve)=>{require(['@pages/Login'],resolve)},
     },
+    {
+      path:'*',
+      redirect: { name: 'home' },
+    }
   ]
 })
 

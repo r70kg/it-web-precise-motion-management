@@ -1,10 +1,10 @@
 <template >
   <div id="coachlist">
-    <ele-table :tableData="filtertableData" :tableconfig="tableconfig" :pagechange="pageChange" :totalnum="filtertotalnum" :pagesize="pagesize" :page-size="pagesize" :currentpage="currentpage" :loading="loading" :setCellClass="setCellClass" tableclass="coach">
+    <ele-table :tableData="filtertableData" :tableconfig="tableconfig" :pagechange="pageChange" :totalnum="filtertotalnum" :pagesize="pagesize" :page-size="pagesize" :currentpage="currentpage" :loading="loading" :setCellClass="setCellClass" tableclass="coach" :formatter="formatter">
       <el-table-column label="操作" class-name="operation">
         <template slot-scope="scope">
           <el-button @click="handleClick(scope.row)" type="text" size="small" :class="scope.row.status">
-            <el-tooltip :disabled='disabled(scope.row)' class="item" effect="dark" content="Top Left 提示文字" placement="top-start">
+            <el-tooltip :disabled='disabled(scope.row)' class="item" effect="dark" content="审核" placement="top">
               <i class="iconfont icon-dunpai"></i>
             </el-tooltip>
           </el-button>
@@ -19,6 +19,7 @@
   import {getcoachlist} from '@services'
   import  C from '@consts'
   import {Coachlist_Userlist} from '@mixin'
+  import {timeformer} from '@utils'
   export default {
     mixins: [Coachlist_Userlist],
     data() {
@@ -68,6 +69,7 @@
         if(row.status=='WaitingCertificated') return false
         return true
       },
+
       ...mapMutations([C.COACHLIST_PAGE_CHANGE_COMMIT])
     },
   }
@@ -76,27 +78,7 @@
 <style lang="scss" scoped>
 </style>
 <style lang="scss">
-  .el-button--text{
-    &.WaitingCertificated{
-       background-color: #08D0EE;
-      color:white;
-     }
-    background-color: #ECEFF1;
-    color:#8597A1;
-    width:.4rem;
-    height:.4rem;
-    border-radius:.5rem;
-    .iconfont{
-      font-size: .2rem;
-    }
-  }
-  td.name{
-    .cell{
-      font-size:.15rem;
-      font-weight: bold;
-      color:#263238;
-    }
-  }
+
 
 
 </style>

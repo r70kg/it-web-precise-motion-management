@@ -15,6 +15,7 @@
             </template>
           </div>
         </div>
+
       </li>
     </Tab>
     <div class="footer" v-show="currentinfo&&infostatus=='Completed'">
@@ -25,12 +26,12 @@
   </div>
 </template>
 <script>
-  import moment from 'moment'
   import {getcoachinfo,validatecoachinfo} from '@services'
   import {mapState,mapMutations} from 'vuex'
   import {Tab,VertifyInput,VertifyPhoto} from '@components'
   import mixin from '@mixin'
   import  C from '@consts'
+  import {timeformer} from '@utils'
   export default {
     mixins: [mixin],
     name:'coachvertify',
@@ -147,8 +148,8 @@
         if(key=='sex'){
           value=0?value='男':value='女'
         }
-        key=='birthday'?value=moment(value).format("YYYY.MM.DD"):''
-        key=='graduatedDate'?value=moment(value).format("YYYY.MM.DD"):''
+        key=='birthday'?value=timeformer(value):''
+        key=='graduatedDate'?value=timeformer(value):''
         if(key=='workDate'){
           value=`${value}年`
         }
