@@ -95,6 +95,17 @@
         if(this.$ISRESOK(res)){
           this[C.CHANGE_PERSONINFO_COMMIT](res)
           this.$router.push(this.$route.query.redirect||{name:'userslist'})
+        }else{
+          if(res.errorCode==C.ERR_INVALID_KAPTCHA){
+            this.statuskaptcha=false
+            this.errkaptchamsg=res.errMsg
+          }
+          if(res.errorCode==C.ERR_INVALID_USERNAME_OR_PASSWORD){
+            this.statusname=false
+            this.errnamemsg=res.errMsg
+            this.statuspassword=false
+            this.errpasswordmsg=res.errMsg
+          }
         }
       },
       ...mapMutations([

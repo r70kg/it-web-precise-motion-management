@@ -42,6 +42,9 @@ axios.interceptors.response.use(function (res) {
   if(errcode==C.ERR_NOTLOGIN){
     store.commit(C.CHANGE_PERSONINFO_COMMIT,null)
   }
+  if(errcode==C.INVALID_DATA){
+    alertMessage('非法数据错误')
+  }
   return res
 }, function (error) {
   if (axios.isCancel(error)) {
