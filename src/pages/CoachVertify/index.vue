@@ -116,15 +116,15 @@
         this.getCoachInfo(key)
       },
       changeInputStatus(index){
-        if(this.iconloading||this.iconloading) return;
+        if(this.iconloading||this.iconloading||this.infostatus!=='Completed') return;
         this.currentinfo[index]['status']=!this.currentinfo[index]['status']
       },
       changePhotoStatus(index1,index2,key2){
-        if(this.iconloading||this.iconloading) return
+        if(this.iconloading||this.iconloading||this.infostatus!=='Completed') return;
         this.currentinfo[index1][key2][index2]['status']=!this.currentinfo[index1][key2][index2]['status']
       },
       async vertify(){
-        const status=this.culculatestatus?'HasChecked':'notPassed'
+        const status=this.culculatestatus?'HasChecked':'NotPassed'
         await validatecoachinfo({params:{coachId:this.currentid},body:{type:this.defaultkey,status:status,info:this.currentinfo},loading:[this,'iconloading']})
         await this.startInit()
       },

@@ -1,7 +1,6 @@
 import axios from 'axios'
 import vm from '@/main.js'
 import C from '@consts'
-import router from '@router'
 import qs from 'qs'
 import store from '@store'
 
@@ -26,10 +25,10 @@ axios.defaults.withCredentials = true
 axios.defaults.crossDomain = true
 
 axios.interceptors.request.use(function (config) {
-  config.headers['Content-Type'] = 'application/x-www-form-urlencoded'
-  if ((config.method === 'post'||config.method === 'put')&& config.type !== 'json') {
-    config.data = qs.stringify(config.data)
-  }
+  // config.headers['Content-Type'] = 'application/x-www-form-urlencoded'
+  // if ((config.method === 'post'||config.method === 'put')&& config.type !== 'json') {
+  //   config.data = qs.stringify(config.data)
+  // }
   return config
 }, function (error) {
   alertMessage()
@@ -38,7 +37,7 @@ axios.interceptors.request.use(function (config) {
 
 
 axios.interceptors.response.use(function (res) {
-  const errcode=res.data.errcode
+  const errcode=res.data.errcode||res.data.errCode||res.data.errorCode
   res=res.data.data||res.data||res
   if(errcode==C.ERR_NOTLOGIN){
     store.commit(C.CHANGE_PERSONINFO_COMMIT,null)
@@ -48,7 +47,7 @@ axios.interceptors.response.use(function (res) {
   if (axios.isCancel(error)) {
     console.log('Request canceled', error.message);
   } else {
-    alertMessage('数据加载失败')
+    alertMessage('操作失败')
   }
   return Promise.reject(error)
 })
