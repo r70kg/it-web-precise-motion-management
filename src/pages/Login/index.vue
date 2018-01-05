@@ -36,7 +36,7 @@
         errpasswordmsg:'',
         errnamemsg:'',
         errkaptchamsg:'',
-        imgsrc:'https://boss.icarbonx.com/bossauth/captcha-image.html',
+        imgsrc:'http://boss.icarbonx.com/bossauth/captcha-image.html',
         iconloading:false
       }
     },
