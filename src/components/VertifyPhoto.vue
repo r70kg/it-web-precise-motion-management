@@ -41,7 +41,9 @@
       },
       getimgAdress(item,index){
         let name='img'+index
-        return item[name]
+        let id=item[name]
+        return 'http://boss.icarbonx.com/bosssport/user/download/'+id
+
       }
     }
   }

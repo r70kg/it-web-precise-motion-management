@@ -21,7 +21,7 @@
       <el-button type="primary" :loading="iconloading&&!culculatestatus" plain round class="unpass" :disabled="culculatestatus" @click="vertify"><i v-if="!iconloading" class="iconfont icon-cuo"></i>信息有误</el-button>
       <el-button type="primary" :loading="iconloading&&culculatestatus" plain round class="pass" :disabled="!culculatestatus" @click="vertify"><i v-if="!iconloading" class="iconfont icon-kh_1"></i>审核通过</el-button>
     </div>
-    {{currentinfo}}
+    <!--{{currentinfo}}-->
   </div>
 </template>
 <script>

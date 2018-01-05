@@ -7,7 +7,9 @@
       :stripe="true"
       style="width: 100%"
       :cell-class-name="setCellClass"
-      v-loading="loading">
+      v-loading="loading"
+      :class="tableclass"
+    >
       <el-table-column :prop='item.prop' :label="item.label" :width="item.width" v-for="item in tableconfig" :key="item.id" :class-name="item.prop">
       </el-table-column>
       <slot></slot>
@@ -31,6 +33,9 @@
       tableData:{
         type:Array,
         default:[]
+      },
+      tableclass:{
+        type:String
       },
       tableconfig:{
         type:Array,
@@ -63,11 +68,9 @@
       }
     },
     methods:{
-
     }
   }
 </script>
 
 <style lang="scss" scoped>
-
 </style>

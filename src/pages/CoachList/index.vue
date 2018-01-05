@@ -1,10 +1,9 @@
 <template >
   <div id="coachlist">
-    <ele-table :tableData="filtertableData" :tableconfig="tableconfig" :pagechange="pageChange" :totalnum="filtertotalnum" :pagesize="pagesize" :page-size="pagesize" :currentpage="currentpage" :loading="loading" :setCellClass="setCellClass">
-      <el-table-column
-        label="操作">
+    <ele-table :tableData="filtertableData" :tableconfig="tableconfig" :pagechange="pageChange" :totalnum="filtertotalnum" :pagesize="pagesize" :page-size="pagesize" :currentpage="currentpage" :loading="loading" :setCellClass="setCellClass" tableclass="coach">
+      <el-table-column label="操作" class-name="operation">
         <template slot-scope="scope">
-          <el-button @click="handleClick(scope.row)" type="text" size="small">
+          <el-button @click="handleClick(scope.row)" type="text" size="small" :class="scope.row.status">
             <el-tooltip :disabled='disabled(scope.row)' class="item" effect="dark" content="Top Left 提示文字" placement="top-start">
               <i class="iconfont icon-dunpai"></i>
             </el-tooltip>
@@ -57,24 +56,17 @@
         this.pagesize=res.pageSize
       },
       handleClick(row) {
+        if(row.status!=='WaitingCertificated') return
         this.$router.push({name:'coachvertify',params: {id:row.id}})
       },
       setCellClass({row, column, rowIndex, columnIndex}){
-        if(row.status=='HasChecked') {
-          switch(column.property){
-            case 'status':
-              return 'HasChecked'
-              break
-          }
-
+        if(row.status&&column.property=='status') {
+          return row.status
         }
       },
       disabled(row){
-        if(row.status=='Completed'){
-          return false
-        }
+        if(row.status=='WaitingCertificated') return false
         return true
-
       },
       ...mapMutations([C.COACHLIST_PAGE_CHANGE_COMMIT])
     },
@@ -82,5 +74,29 @@
 </script>
 
 <style lang="scss" scoped>
+</style>
+<style lang="scss">
+  .el-button--text{
+    &.WaitingCertificated{
+       background-color: #08D0EE;
+      color:white;
+     }
+    background-color: #ECEFF1;
+    color:#8597A1;
+    width:.4rem;
+    height:.4rem;
+    border-radius:.5rem;
+    .iconfont{
+      font-size: .2rem;
+    }
+  }
+  td.name{
+    .cell{
+      font-size:.15rem;
+      font-weight: bold;
+      color:#263238;
+    }
+  }
+
 
 </style>
