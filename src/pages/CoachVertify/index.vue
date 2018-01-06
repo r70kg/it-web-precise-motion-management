@@ -15,7 +15,6 @@
             </template>
           </div>
         </div>
-
       </li>
     </Tab>
     <div class="footer" v-show="currentinfo&&infostatus=='Completed'">

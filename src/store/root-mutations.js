@@ -17,4 +17,7 @@ export default {
       window.location.reload()
     }
   },
+  [C.CHANGE_TOPMODELSTATUS_COMMIT](state,payload){
+    state.topModelStatus=payload
+  }
 }

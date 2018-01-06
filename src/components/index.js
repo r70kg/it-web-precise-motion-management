@@ -6,6 +6,7 @@ import VertifyInput from './VertifyInput'
 import VertifyPhoto from './VertifyPhoto'
 import BreadCrumb from './BreadCrumb'
 import NormalInput from './NormalInput'
+import Model from './Model'
 export{
   HelloWorld,
   FilterInput,
@@ -14,5 +15,6 @@ export{
   VertifyInput,
   VertifyPhoto,
   BreadCrumb,
-  NormalInput
+  NormalInput,
+  Model,
 }

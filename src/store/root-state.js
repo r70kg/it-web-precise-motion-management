@@ -1,5 +1,11 @@
 export default {
   filterkey:'',
-  personInfo:null
+  personInfo:null,
+  topModelStatus:{
+    classname:'',
+    show:false,
+    bodyhtml:'',
+    closehtml:''
+  },
 }
 

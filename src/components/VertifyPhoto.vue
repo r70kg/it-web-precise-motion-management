@@ -14,6 +14,8 @@
 </template>
 
 <script>
+  import {mapMutations} from 'vuex'
+  import C from '@consts'
   export default {
     name: 'photocomponent',
     props:{
@@ -37,18 +39,28 @@
       },
       dblclick(item,index){
         const src=this.getimgAdress(item,index)
-        this.$alert(`<img class="message-box" src=${src}  />`, {
-          center:true,
-          customClass:'photos',
-          dangerouslyUseHTMLString: true
+        this[C.CHANGE_TOPMODELSTATUS_COMMIT]({
+          show:true,
+          bodyhtml:'<img src='+src+' />',
+          classname:'photo',
+          closehtml:'<div class="back"><i class="iconfont icon-cuo"></div></i>'
         })
+//        this.$alert(`<img class="message-box" src=${src}  />`, {
+//          center:true,
+//          customClass:'photos',
+//          dangerouslyUseHTMLString: true
+//        })
       },
       getimgAdress(item,index){
         let name='img'+index
         let id=item[name]
         return 'http://boss.icarbonx.com/bosssport/user/download/'+id
 
-      }
+      },
+      clickme(){
+        console.log('ahahha')
+      },
+      ...mapMutations([C.CHANGE_TOPMODELSTATUS_COMMIT])
     }
   }
 </script>
@@ -62,77 +74,71 @@
     width:100%;
     display: flex;
     justify-content:flex-end;
-    h6{
-      font-size: .16rem;
-      margin-right: 0.2rem;
-      white-space:nowrap;
-    }
-    ul.list{
-      width:5.1rem !important;
-      display:flex;
-      flex-wrap:wrap;
-      li{
-        position:relative;
-        margin:.1rem;
-        margin-top: 0;
-        margin-bottom: .2rem;
-        width: 2.25rem;
-        height:1.5rem;
-        background: #D8D8D8;
-        .hovershow{
-          right:0;
-          bottom:0;
-          width:100%;
-          position:absolute;
-          //background-color: rgba(0,0,0,.6);
-          display:flex;
-          justify-content: flex-end;
-          i{
-            margin-right: 3px;
-            font-size: .2rem;
-            color:#FC7563;
-          }
-
-        }
-
-        img{
-          width:100%;
-          height:100%;
-        }
-      }
-    }
+  h6{
+    font-size: .16rem;
+    margin-right: 0.2rem;
+    white-space:nowrap;
   }
+  ul.list{
+    width:5.1rem !important;
+    display:flex;
+    flex-wrap:wrap;
+  li{
+    position:relative;
+    margin:.1rem;
+    margin-top: 0;
+    margin-bottom: .2rem;
+    width: 2.25rem;
+    height:1.5rem;
+    background: #D8D8D8;
+  .hovershow{
+    right:0;
+    bottom:0;
+    width:100%;
+    position:absolute;
+  //background-color: rgba(0,0,0,.6);
+    display:flex;
+    justify-content: flex-end;
+  i{
+    margin-right: 3px;
+    font-size: .2rem;
+    color:#FC7563;
+  }
+
+  }
+
+  img{
+    width:100%;
+    height:100%;
+  }
+  }
+  }
+  }
+
 </style>
-<style>
-  .el-message-box.photos{
-    max-height: 6rem;
-    max-width: 5rem;
-    padding:0;
-  .el-message-box__wrapper{
-    z-index: 100004 !important;
-  }
-  .el-message-box__content{
-    padding:0 0;
-  }
-
-  .el-message-box__header{
-    padding:0;
-  }
-  .el-message-box__btns{
+<style lang="scss">
+  #topmodel.photo{
     display: flex;
     justify-content: center;
-    position:absolute;
-
+    align-items: center;
+  .body{
+    max-height: 6rem;
+    max-width: 5rem;
   }
-  img.message-box{
-    padding:0;
-    top:0;
-    max-width: 100%;
+  .close{
+    margin-top: .2rem;
+    display: flex;
+    justify-content: center;
+  div.back{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius:10rem;
+    width:.4rem;
+    height:.4rem;
+    background:#979797;
+    color:white;
   }
-
   }
-  img.message-box{
-    height: 100%;
-    width: 100%;
   }
 </style>
