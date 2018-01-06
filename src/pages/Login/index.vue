@@ -80,12 +80,14 @@
         this.imgsrc=this.imgsrc+'?timestamp='+Date.now()
       },
       checkStatus(){
-        if(!(this.checkName()&&this.checkPassword()&&this.checkKaptcha())){
-          return false
-        }
+        const status1=this.checkName()
+        const status2=this.checkPassword()
+        const status3=this.checkKaptcha()
+        if(status1&&status2&&status3) return true
+        return false
       },
       async login(){
-        this.checkStatus()
+        if(!this.checkStatus()) return false
         const res=await login({body:{
           userName:this.name,
           kaptcha:this.kaptcha,
