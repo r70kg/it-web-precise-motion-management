@@ -126,6 +126,9 @@
     display:flex;
     justify-content: flex-end;
     position:relative;
+  img{
+    width: 100%;
+  }
   .inputinfo{
   .avatar{
     display:flex;
@@ -146,8 +149,9 @@
   }
   //border:1px solid red;
   }
-  position:absolute;
-  background: transparent;
+  position:fixed;
+  right:0;
+  //background: white;
   width:5.1rem;
   height:100%;
   display: flex;

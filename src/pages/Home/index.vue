@@ -170,6 +170,7 @@
       .main{
         margin-top: 0.66rem;
         padding: 0.44rem 0.6rem;
+        padding-bottom:.25rem;
         width:100%;
       }
     }
