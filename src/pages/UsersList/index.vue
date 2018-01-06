@@ -2,9 +2,9 @@
   <div id="userlist">
     <ele-table :tableData="filtertableData" :tableconfig="tableconfig" :pagechange="pageChange" :totalnum="filtertotalnum" :pagesize="pagesize" :page-size="pagesize" :currentpage="currentpage" :loading="loading" :formatter="formatter">
       <el-table-column
-      label="操作" class-name="operation">
+      label="操作" class-name="operation" fixed="right">
       <template slot-scope="scope">
-      <el-button @click="handleClick(scope.row)" type="text" size="small"><i class="iconfont icon-shuxie"></i></el-button>
+      <el-button @click="handleClick(scope.row)" type="text" size="small" ><i class="iconfont icon-shuxie"></i></el-button>
       </template>
       </el-table-column>
     </ele-table>

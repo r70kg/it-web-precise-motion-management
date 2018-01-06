@@ -1,7 +1,7 @@
 <template >
   <div id="coachlist">
     <ele-table :tableData="filtertableData" :tableconfig="tableconfig" :pagechange="pageChange" :totalnum="filtertotalnum" :pagesize="pagesize" :page-size="pagesize" :currentpage="currentpage" :loading="loading" :setCellClass="setCellClass" tableclass="coach" :formatter="formatter">
-      <el-table-column label="操作" class-name="operation">
+      <el-table-column label="操作" class-name="operation" fixed="right">
         <template slot-scope="scope">
           <el-button @click="handleClick(scope.row)" type="text" size="small" :class="scope.row.status">
             <el-tooltip :disabled='disabled(scope.row)' class="item" effect="dark" content="审核" placement="top">

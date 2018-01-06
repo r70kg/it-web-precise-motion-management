@@ -145,9 +145,12 @@ td.status{
   }
 
 }
-.el-table td, .el-table th{
-  padding: auto .2rem !important;
+@media screen and (min-width: 1200px) {
+  .el-table td, .el-table th{
+    padding:.2rem 0  .2rem .5rem !important;
+  }
 }
+
 .el-table .cell{
   color:#8597A1;
   font-size: .15rem;
