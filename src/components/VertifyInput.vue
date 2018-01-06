@@ -2,7 +2,11 @@
   <div class="inputcontainer" @click="click()" :class="{'error':!status}">
     <label :class="info">{{label}}</label>
     <div  class="content" readonly="readonly">{{value}}</div>
-    <div class="tanhao" v-if="!status"><i class="iconfont icon-tanhao"></i></div>
+    <div class="tanhao" v-if="!status">
+      <el-tooltip  class="item" effect="dark" content="点亮表达有误" placement="top">
+        <i class="iconfont icon-tanhao"></i>
+      </el-tooltip>
+    </div>
   </div>
 </template>
 

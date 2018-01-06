@@ -3,7 +3,11 @@
     <h6>{{label}}</h6>
     <ul class="list">
       <li v-for="(item,index) in photos" @click.prevent="click(index)" @dblclick.prevent="dblclick(item,index)" :key=""><img :src="getimgAdress(item,index)" />
-        <div class="hovershow" ><i class="iconfont icon-tanhao" v-if="!item.status"></i></div>
+        <div class="hovershow" v-if="!item.status">
+          <el-tooltip  class="item" effect="dark" content="点亮表达有误" placement="top">
+            <i class="iconfont icon-tanhao" ></i>
+          </el-tooltip>
+        </div>
       </li>
     </ul>
   </div>

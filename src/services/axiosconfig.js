@@ -1,7 +1,6 @@
 import axios from 'axios'
 import vm from '@/main.js'
 import C from '@consts'
-import qs from 'qs'
 import store from '@store'
 
 const loading=function(data,status){
@@ -85,6 +84,7 @@ function request(url='',type='get',data={},config={}){
       params:query,
       data:body,
       url:url,
+      baseURL: 'http://boss.icarbonx.com/',
       cancelToken: new CancelToken(function executor(c) {
         if(!requestspool[url]){
           requestspool[url]=c
