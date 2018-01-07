@@ -122,8 +122,9 @@
     justify-content: center;
     align-items: center;
   .body{
-    max-height: 6rem;
-    max-width: 5rem;
+    overflow: auto;
+    max-height: 7rem;
+    max-width: 16rem;
   }
   .close{
     margin-top: .2rem;

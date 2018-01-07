@@ -27,9 +27,9 @@
     data () {
       return {
         //chujunfei
-        name:'chujunfei',
-        password:'chujunfei',
-        kaptcha:'1234',
+        name:'',
+        password:'',
+        kaptcha:'',
         statusname:null,
         statuspassword:null,
         statuskaptcha:null,
